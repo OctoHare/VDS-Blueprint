@@ -579,7 +579,9 @@ docker --version
 
 ## ❶ 🏗️ Portainer
   
-Устанавливать Portiner (в отличии от [офицальной инструкции](https://docs.portainer.io/start/install-ce/server/docker/linux)) будем по проще, выполните блок команд:
+Устанавливать Portiner (в отличии от [офицальной инструкции](https://docs.portainer.io/start/install-ce/server/docker/linux)) будем по проще. Порт 8000 используется для общения нескольких серверов с портайнер между собой, а HTTPS порт 9443 меняем на HTTP порт 9000.
+<br><br>
+Выполните блок команд:
 ```bash
 # Установка и запуск Portainer
 docker run -d \
@@ -622,18 +624,22 @@ docker logs portainer --tail 20
 apt install micro
 ```
 
+Создаём директории для настроек и для сайта-заглушки:
 ```bash
 # Создаём директории
 mkdir -p /var/www/html
 mkdir -p /etc/caddy
+```
 
+Создаём файл Caddyfile с настроек для Caddy:
+```bash
 # Создаём Caddyfile
 cat > /etc/caddy/Caddyfile << 'EOF'
 :80, :443 {
     abort
 }
 
-de.zaic.cc {
+megaserver.ru {
     log {
         output stdout
         format console
@@ -642,7 +648,7 @@ de.zaic.cc {
     # Скрываем присутствие Caddy наружу
     header -Server
 
-    handle_path /portwine/* {
+    handle_path /portainer/* {
         header -X-Powered-By
         reverse_proxy 127.0.0.1:9000
     }
@@ -653,7 +659,10 @@ de.zaic.cc {
     }
 }
 EOF
+```
 
+Создаём простой HTML файл для заглушки:
+```bash
 # Создаём HTML заглушку
 cat > /var/www/html/index.html << 'EOF'
 <!DOCTYPE html>
@@ -666,13 +675,17 @@ cat > /var/www/html/index.html << 'EOF'
 </body>
 </html>
 EOF
+```
 
+Проверяем, что директории и файлы содались:
+```bash
 # Проверяем
 ls -la /etc/caddy/
 ls -la /var/www/html/
 ```
 
-В Portainer:
+Далее для установки Caddy переходим в Portainer:
+
 1. `Stacks` → `+ Add stack`
 2. Name: `caddy`
 3. Web editor:
@@ -694,23 +707,12 @@ volumes:
   caddy_data:
   caddy_config:
 ```
-<br>
-После успешной установки Portainer доступен по адресу:<br>
 
-`https://megaserver.ru:9443`, то есть на 9443 порту вышего сервера.
+Проверяем, что по адресам:
 
-Поторопитесь туда зайти и создать первого пользователя с правами администратора:<br>
+`https://megaserver.ru` - открывается тот одинойкий HTML-заглушка
 
-- оставьте логин `admin` или измените его на свой
-- введите сложный пароль
-- поддтвердите свой пароль
-- введите setup token
+`https://megaserver.ru/portainer/` - открывается Portainer
 
-Найти setup token можно в логах после установки Portainer:
-```bash
-# Проверяем логи
-docker logs portainer --tail 20
-```
-Ищем строку, которая начинается с `setup_token=` и копируем длинный ключ. Теперь Portainer позволит создать первого пользователя.
 <br><br>
 </details>
