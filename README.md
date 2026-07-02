@@ -61,6 +61,12 @@
     > Ищите импортозамещенную версию без ограничения количества сохраненных сессий подключения.
 <br><br>
 </details>
+<br>
+
+```text
+На данном этапе
+```
+<br>
 
 ---
 
@@ -550,6 +556,12 @@ dpkg-reconfigure -plow unattended-upgrades
 ```
 <br><br>
 </details>
+<br>
+
+```text
+На данном этапе
+```
+<br>
 
 ---
 
@@ -749,3 +761,11 @@ docker exec -w /etc/caddy caddy caddy reload
 
 <br><br>
 </details>
+<br>
+
+```text
+На данном этапе
+```
+<br>
+
+---
