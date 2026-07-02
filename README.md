@@ -617,12 +617,11 @@ docker logs portainer --tail 20
 <details>
 <summary>❷ 🔒 Caddy</summary>
 
-## ❷ 🔒 Caddy
+## Caddy - веб сервер
 
-Ставим нормальный текстовый редактор для консоли:
-```bash
-apt install micro
-```
+Caddy — это современный, простой в использовании веб-сервер, прокси и менеджер TLS-сертификатов, разработанный с прицелом на автоматизацию и безопасность. Он позиционируется как "веб-сервер по умолчанию" и выделяется на фоне классических решений вроде Nginx и Apache рядом ключевых преимуществ.
+
+[Официальный сайт](https://caddyserver.com) | [Описание](https://devtrends.ru/go/caddyserver-caddy)
 
 Создаём директории для настроек и для сайта-заглушки:
 ```bash
@@ -631,10 +630,13 @@ mkdir -p /var/www/html
 mkdir -p /etc/caddy
 ```
 
-Создаём файл Caddyfile с настроек для Caddy:
+Создаём файл Caddyfile с настройками для Caddy:
 ```bash
 # Создаём Caddyfile
 cat > /etc/caddy/Caddyfile << 'EOF'
+{
+    email your-email@example.com
+}
 :80, :443 {
     abort
 }
@@ -648,6 +650,8 @@ megaserver.ru {
     # Скрываем присутствие Caddy наружу
     header -Server
 
+    encode zstd gzip
+
     handle_path /portainer/* {
         header -X-Powered-By
         reverse_proxy 127.0.0.1:9000
@@ -655,6 +659,7 @@ megaserver.ru {
 
     handle {
         root * /srv
+        try_files {path} {path}/ /index.html
         file_server
     }
 }
@@ -713,6 +718,34 @@ volumes:
 `https://megaserver.ru` - открывается тот одинойкий HTML-заглушка
 
 `https://megaserver.ru/portainer/` - открывается Portainer
+<br><br>
+➕ Дополнительно:
+<br><br>
+Ставим нормальный текстовый редактор для консоли:
+```bash
+apt install micro
+```
+<br><br>
+Редактирование конфигурации Caddy в Caddyfile:
+```bash
+micro /etc/caddy/Caddyfile
+```
+<br><br>
+Автоформатирование Caddyfile (отступы, пробелы):
+```bash
+docker exec -w /etc/caddy caddy caddy fmt --overwrite
+```
+<br><br>
+Проверка конфигурации после редактирования Caddyfile:
+```bash
+docker exec -w /etc/caddy caddy caddy validate
+```
+<br><br>
+Применение конфигурации после редактирования Caddyfile:
+```bash
+docker exec -w /etc/caddy caddy caddy reload
+```
+<br><br>
 
 <br><br>
 </details>
