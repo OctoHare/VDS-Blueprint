@@ -761,6 +761,38 @@ docker exec -w /etc/caddy caddy caddy reload
 
 <br><br>
 </details>
+
+<details>
+<summary>❸ 🚪 Прячем Portainer</summary>
+<br>
+  
+Мы настроили доступ к Portiner через Caddy, через обычный 443 HTTPS порт по адресу `https://megaserver.ru/portainer/`<br><br>
+Но мы всё ещё можем попасть в Portainer по IP адресу сервера и порту - `https://111.22.55.222:9000`<br><br>
+
+Почему мы изначально при включенном firewall и ограниченом наборе портов смогли попасть в Portainer на 9000 порту? Docker полностью игнорирует UFW и обходит его правила по умолчанию. Любой контейнер, который запускается с флагом `-p ` (проброс портов), автоматически становится доступен всему миру, вопреки включенному UFW Firewall. Одним из способов этого избежать является заставить Portainer слушать 9000 порт только на localhost (127.0.0.1).<br><br>
+
+При развороте контейнера параметр выглядит так:
+```bash
+-p 127.0.0.1:9000:9000
+```
+
+Удаляем Portainer и тут же устанавливаем с другими настройками:
+
+```bash
+# Удаление Portainer
+docker rm -f portainer
+
+# Установка без доступа по IP сервера
+docker run -d \
+  -p 127.0.0.1:9000:9000 \
+  --name portainer \
+  --restart=always \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v portainer_data:/data \
+  portainer/portainer-ce:lts
+```
+
+</details>
 <br>
 
 ```text
