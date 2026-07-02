@@ -73,9 +73,9 @@
 ## 🪏 Настрока сервера
 
 <details>
-<summary>🔄 ❶ Обновление системы</summary>
+<summary>❶ 🔄 Обновление системы</summary>
 
-## 🔄 ❶ Обновление системы
+### Обновление системы
 
 Перед началом настройки обновим все пакеты системы:
 
@@ -122,9 +122,9 @@ reboot
 </details>
 
 <details>
-<summary>🏷️ ❷ Настройка hostname</summary>
+<summary>❷ 🏷️ Настройка hostname</summary>
 
-## 🏷️ ❷ Настройка hostname
+### Настройка hostname
 
 По умолчанию хостер устанавливает своё имя (например, `server001.hosting.com`).
 
@@ -181,9 +181,9 @@ hostname -A
 </details>
 
 <details>
-<summary>🔐 ❸ Безопасность SSH</summary>
+<summary>❸ 🔐 Безопасность SSH</summary>
 
-## 🔐 ❸ Безопасность SSH 
+### Безопасность SSH 
 
 <details>
 <summary>1. 👤 Создаём sudo-пользователя</summary>
@@ -525,9 +525,9 @@ PermitRootLogin no
 </details>
 
 <details>
-<summary>🆙 ❹ Авто обновление безопасности</summary>
+<summary>❹ 🆙 Авто обновление безопасности</summary>
 
-## 🆙 ❹ Авто обновление безопасности
+### Авто обновление безопасности
 
 ### Что обновляем?
 
