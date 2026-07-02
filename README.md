@@ -579,12 +579,11 @@ docker --version
 
 ## ❶ 🏗️ Portainer
   
-Установка Portiner (используется [офицальная инструкци](https://docs.portainer.io/start/install-ce/server/docker/linux)), выполните блок команд:
+Устанавливать Portiner (в отличии от [офицальной инструкции](https://docs.portainer.io/start/install-ce/server/docker/linux)) будем по проще, выполните блок команд:
 ```bash
-# Запускаем Portainer (команда из официальной документации)
+# Установка и запуск Portainer
 docker run -d \
-  -p 8000:8000 \
-  -p 9443:9443 \
+  -p 9000:9000 \
   --name portainer \
   --restart=always \
   -v /var/run/docker.sock:/var/run/docker.sock \
@@ -597,9 +596,7 @@ docker ps | grep portainer
 <br>
 После успешной установки Portainer доступен по адресу:<br>
 
-`https://megaserver.ru:9443`, то есть на 9443 порту вышего сервера.
-
-Поторопитесь туда зайти и создать первого пользователя с правами администратора:<br>
+`http://megaserver.ru:9000`, то есть по HTTP протоколу на 9000 порту вышего сервера, зайдите и создайте первого пользователя с правами администратора:<br>
 
 - оставьте логин `admin` или измените его на свой
 - введите сложный пароль
@@ -619,21 +616,83 @@ docker logs portainer --tail 20
 <summary>❷ 🔒 Caddy</summary>
 
 ## ❷ 🔒 Caddy
-  
-Создаём две конфигурац
-```bash
-# Запускаем Portainer (команда из официальной документации)
-docker run -d \
-  -p 8000:8000 \
-  -p 9443:9443 \
-  --name portainer \
-  --restart=always \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  -v portainer_data:/data \
-  portainer/portainer-ce:lts
 
-# Проверяем что запустился
-docker ps | grep portainer
+Ставим нормальный текстовый редактор для консоли:
+```bash
+apt install micro
+```
+
+```bash
+# Создаём директории
+mkdir -p /var/www/html
+mkdir -p /etc/caddy
+
+# Создаём Caddyfile
+cat > /etc/caddy/Caddyfile << 'EOF'
+:80, :443 {
+    abort
+}
+
+de.zaic.cc {
+    log {
+        output stdout
+        format console
+    }
+
+    # Скрываем присутствие Caddy наружу
+    header -Server
+
+    handle_path /portwine/* {
+        header -X-Powered-By
+        reverse_proxy 127.0.0.1:9000
+    }
+
+    handle {
+        root * /srv
+        file_server
+    }
+}
+EOF
+
+# Создаём HTML заглушку
+cat > /var/www/html/index.html << 'EOF'
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Under Construction</title>
+</head>
+<body>
+    <h1>Under Construction</h1>
+</body>
+</html>
+EOF
+
+# Проверяем
+ls -la /etc/caddy/
+ls -la /var/www/html/
+```
+
+В Portainer:
+1. `Stacks` → `+ Add stack`
+2. Name: `caddy`
+3. Web editor:
+
+```bash
+services:
+  caddy:
+    image: caddy:latest
+    container_name: caddy
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - /etc/caddy/Caddyfile:/etc/caddy/Caddyfile
+      - /var/www/html:/srv
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  caddy_data:
+  caddy_config:
 ```
 <br>
 После успешной установки Portainer доступен по адресу:<br>
