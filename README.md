@@ -801,3 +801,24 @@ docker run -d \
 <br>
 
 ---
+
+## 🏰 Установка инструментов
+
+<details>
+<summary>Панель MHSanaei/3x-ui</summary>
+
+### Обновление системы
+
+Ищем сертифкаты в контейнере Caddy:
+```bash
+docker exec caddy find /data/caddy/certificates -type f -name "*.crt" -o -name "*.key"
+```
+
+---
+</details>
+<br>
+
+```text
+На данном этапе
+```
+<br>
