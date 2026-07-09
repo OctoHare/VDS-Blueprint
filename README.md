@@ -187,7 +187,10 @@ hostname -A
 
 <details>
 <summary>1. 👤 Создаём sudo-пользователя</summary>
-### 👤 Создаём sudo-пользователя
+<br>
+  
+> Злоумышленники и автоматические сканеры по умолчанию знают имя главного администратора системы — root.<br>
+> Оставляя возможность прямого подключения под этим именем, мы отдаем взломщикам ровно половину успеха: им остается лишь подобрать пароль. Создавая учетную запись с уникальным именем и полностью запрещая удаленный доступ для root, мы в корне меняем ситуацию. Теперь при попытке подбора (брутфорса) боту придется угадывать одновременно две переменные — и имя пользователя, и его сложный пароль. В криптографии и информационной безопасности такой подход увеличивает число возможных комбинаций для взлома в геометрической прогрессии, превращая быструю автоматическую атаку в практически невыполнимую задачу. Таким образом, ваш сервер исчезает из списков легких целей.
 
 Придумайте имя пользователя, например `hyperadmin`
 
@@ -230,6 +233,82 @@ sudo whoami
 > 1️⃣ Используйте `sudo <команда>` для разовых команд.
 <br><br>
 </details>
+
+<details>
+<summary>5. ⛔ Отключае вход по SSH для пользователя `root`</summary>
+### ⛔ Отключае вход по SSH для пользователя ROOT
+
+Теперь можно безопасно отключить root login. Выполните следующий блок команд:
+```
+# 1. Отключаем root login
+sed -i 's/^PermitRootLogin yes/PermitRootLogin no/' /etc/ssh/sshd_config
+
+# 2. Проверяем что изменилось
+grep "^PermitRootLogin" /etc/ssh/sshd_config
+
+# 3. Перезапускаем SSH
+systemctl restart ssh
+
+# 4. Проверяем что SSH работает
+systemctl status ssh --no-pager | head -10
+```
+
+Ожидаемый результат:
+```bash
+PermitRootLogin no
+```
+<br><br>
+</details>
+</details>
+
+
+
+<details>
+<summary>2. 🔃 Переключаем SSH на новый порт</summary>
+<br>
+Когда сервер появляется в сети, он сразу становится виден тысячам автоматических сканеров (ботов). Они непрерывно прочесывают адресное пространство интернета в поисках легкой добычи. Перенос SSH со стандартного 22-го порта позволяет кардинально снизить фоновый шум и нагрузку на систему: роботы-сканеры в 99% случаев проверяют только стандартные точки входа. Поэтому SSH с 22-го порта мы переносим на любой другой свободный порт. Ниже приведена таблица стандартных, условно зарезервированных портов — ознакомьтесь с ней, чтобы случайно не занять адрес другой важной службы, и выберите для себя любой другой свободный номер.
+<br>
+
+```bash
+# Определяем новый порт
+NEW_PORT=222
+
+# 1. Меняем порт в sshd_config
+sed -i "s/^#Port 22/Port $NEW_PORT/" /etc/ssh/sshd_config
+sed -i "s/^Port 22/Port $NEW_PORT/" /etc/ssh/sshd_config
+
+# 2. Создаём override для ssh.socket
+mkdir -p /etc/systemd/system/ssh.socket.d
+
+cat > /etc/systemd/system/ssh.socket.d/override.conf << EOF
+[Socket]
+ListenStream=
+ListenStream=0.0.0.0:$NEW_PORT
+ListenStream=[::]:$NEW_PORT
+EOF
+
+# 3. Перезагружаем systemd
+systemctl daemon-reload
+
+# 4. Перезапускаем socket и сервис
+systemctl restart ssh.socket 2>/dev/null || true
+systemctl restart ssh
+
+# 5. Проверяем результат
+ss -tlnp | grep $NEW_PORT
+```
+
+**Ожидаемый результат:**
+```bash
+LISTEN 0      4096         0.0.0.0:222       0.0.0.0:*
+LISTEN 0      4096            [::]:222          [::]:*
+```
+
+### 🚨 НЕ ЗАКРЫВАЯ текущую сессию/окно, откройте НОВОЕ окно терминала для проверки.<br>
+Подключитесь к серверу по SSH на `222` порт с логином `hyperadmin`. Если всё успешно едем дальше.
+<br><br>
+</details>
+
 
 <details>
 <summary>2. 🧱 Настройка UFW Firewall</summary>
@@ -390,49 +469,6 @@ To                         Action      From
 <br><br>
 </details>
 
-<details>
-<summary>3. 🥷 Переключаем SSH на новый порт</summary>
-### 🥷 Переключаем SSH на новый порт
-
-```bash
-# Определяем новый порт
-NEW_PORT=222
-
-# 1. Меняем порт в sshd_config
-sed -i "s/^#Port 22/Port $NEW_PORT/" /etc/ssh/sshd_config
-sed -i "s/^Port 22/Port $NEW_PORT/" /etc/ssh/sshd_config
-
-# 2. Создаём override для ssh.socket
-mkdir -p /etc/systemd/system/ssh.socket.d
-
-cat > /etc/systemd/system/ssh.socket.d/override.conf << EOF
-[Socket]
-ListenStream=
-ListenStream=0.0.0.0:$NEW_PORT
-ListenStream=[::]:$NEW_PORT
-EOF
-
-# 3. Перезагружаем systemd
-systemctl daemon-reload
-
-# 4. Перезапускаем socket и сервис
-systemctl restart ssh.socket 2>/dev/null || true
-systemctl restart ssh
-
-# 5. Проверяем результат
-ss -tlnp | grep $NEW_PORT
-```
-
-**Ожидаемый результат:**
-```bash
-LISTEN 0      4096         0.0.0.0:222       0.0.0.0:*
-LISTEN 0      4096            [::]:222          [::]:*
-```
-
-### 🚨 НЕ ЗАКРЫВАЯ текущую сессию/окно, откройте НОВОЕ окно терминала для проверки.<br>
-Подключитесь к серверу по SSH на `222` порт с логином `hyperadmin`. Если всё успешно едем дальше.
-<br><br>
-</details>
 
 <details>
 <summary>4. 🏹 Утилита fail2ban</summary>
@@ -495,33 +531,6 @@ fail2ban-client status sshd
 fail2ban-client status
 ```
 <br><br>
-</details>
-
-<details>
-<summary>5. ⛔ Отключае вход по SSH для пользователя `root`</summary>
-### ⛔ Отключае вход по SSH для пользователя ROOT
-
-Теперь можно безопасно отключить root login. Выполните следующий блок команд:
-```
-# 1. Отключаем root login
-sed -i 's/^PermitRootLogin yes/PermitRootLogin no/' /etc/ssh/sshd_config
-
-# 2. Проверяем что изменилось
-grep "^PermitRootLogin" /etc/ssh/sshd_config
-
-# 3. Перезапускаем SSH
-systemctl restart ssh
-
-# 4. Проверяем что SSH работает
-systemctl status ssh --no-pager | head -10
-```
-
-Ожидаемый результат:
-```bash
-PermitRootLogin no
-```
-<br><br>
-</details>
 </details>
 
 <details>
