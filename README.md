@@ -265,88 +265,14 @@ PermitRootLogin no
 </details>
 
 <details>
-<summary>2. 🔃 Переключаем SSH на новый порт</summary>
+<summary>3. 🔃 Переключаем SSH на новый порт</summary>
 <br>
 
 > Когда сервер появляется в сети, он сразу становится виден тысячам автоматических сканеров (ботов). Они непрерывно прочесывают адресное пространство интернета в поисках легкой добычи. Перенос SSH со стандартного 22-го порта позволяет кардинально снизить фоновый шум и нагрузку на систему: роботы-сканеры в 99% случаев проверяют только стандартные точки входа. Поэтому SSH с 22-го порта мы переносим на любой другой свободный порт. Ниже приведена таблица стандартных, условно зарезервированных портов — ознакомьтесь с ней, чтобы случайно не занять адрес другой важной службы, и выберите для себя любой другой свободный номер.
 <br>
 
-```bash
-# Определяем новый порт
-NEW_PORT=222
-
-# 1. Меняем порт в sshd_config
-sed -i "s/^#Port 22/Port $NEW_PORT/" /etc/ssh/sshd_config
-sed -i "s/^Port 22/Port $NEW_PORT/" /etc/ssh/sshd_config
-
-# 2. Создаём override для ssh.socket
-mkdir -p /etc/systemd/system/ssh.socket.d
-
-cat > /etc/systemd/system/ssh.socket.d/override.conf << EOF
-[Socket]
-ListenStream=
-ListenStream=0.0.0.0:$NEW_PORT
-ListenStream=[::]:$NEW_PORT
-EOF
-
-# 3. Перезагружаем systemd
-systemctl daemon-reload
-
-# 4. Перезапускаем socket и сервис
-systemctl restart ssh.socket 2>/dev/null || true
-systemctl restart ssh
-
-# 5. Проверяем результат
-ss -tlnp | grep $NEW_PORT
-```
-
-**Ожидаемый результат:**
-```bash
-LISTEN 0      4096         0.0.0.0:222       0.0.0.0:*
-LISTEN 0      4096            [::]:222          [::]:*
-```
-
-### 🚨 НЕ ЗАКРЫВАЯ текущую сессию/окно, откройте НОВОЕ окно терминала для проверки.<br>
-Подключитесь к серверу по SSH на `222` порт с логином `hyperadmin`. Если всё успешно едем дальше.
-<br><br>
-</details>
-
-
 <details>
-<summary>2. 🧱 Настройка UFW Firewall</summary>
-### 🧱 Настройка UFW Firewall
-
-#### Проверка статуса UFW
-
-```bash
-# Проверяем, установлен ли UFW
-ufw status 2>/dev/null && echo "✅ UFW установлен" || echo "❌ UFW не установлен"
-```
-
-#### Устанавливаем UFW, если не установлен
-
-```bash
-# Устанавливаем UFW
-apt install ufw -y
-
-# Проверяем установку
-ufw status
-```
-
-#### Проверяем конфигурацию UFW
-
-```bash
-# Проверяем текущий статус
-ufw status verbose
-
-# Проверяем какие порты уже открыты
-ufw status numbered
-```
-
-### ℹ️ UFW Firewall как правило, если установлен то находится в выключенном состоянии `Status: inactive`. Далее включаем его и настраиваем доступ только по определённым портам. В том числе со сменой стандартного `22` SSH порта на любой, какой нравится. Кроме этих:
-
-<details>
-<summary>📜 список наиболее популярных и важных зарезервированных портов</summary>
+<summary>📜 Cписок наиболее популярных и важных зарезервированных портов</summary>
   
 ```markdown
 # ==============================================================================
@@ -428,6 +354,83 @@ ufw status numbered
 
 Например, выбрали порт 222
 
+
+```bash
+# Определяем новый порт
+NEW_PORT=222
+
+# 1. Меняем порт в sshd_config
+sed -i "s/^#Port 22/Port $NEW_PORT/" /etc/ssh/sshd_config
+sed -i "s/^Port 22/Port $NEW_PORT/" /etc/ssh/sshd_config
+
+# 2. Создаём override для ssh.socket
+mkdir -p /etc/systemd/system/ssh.socket.d
+
+cat > /etc/systemd/system/ssh.socket.d/override.conf << EOF
+[Socket]
+ListenStream=
+ListenStream=0.0.0.0:$NEW_PORT
+ListenStream=[::]:$NEW_PORT
+EOF
+
+# 3. Перезагружаем systemd
+systemctl daemon-reload
+
+# 4. Перезапускаем socket и сервис
+systemctl restart ssh.socket 2>/dev/null || true
+systemctl restart ssh
+
+# 5. Проверяем результат
+ss -tlnp | grep $NEW_PORT
+```
+
+**Ожидаемый результат:**
+```bash
+LISTEN 0      4096         0.0.0.0:222       0.0.0.0:*
+LISTEN 0      4096            [::]:222          [::]:*
+```
+
+### 🚨 НЕ ЗАКРЫВАЯ текущую сессию/окно, откройте НОВОЕ окно терминала для проверки.<br>
+Подключитесь к серверу по SSH на `222` порт с логином `hyperadmin`. Если всё успешно едем дальше.
+<br><br>
+</details>
+
+
+<details>
+<summary>4. 🧱 Настройка UFW Firewall</summary>
+
+> UFW (Uncomplicated Firewall) — встроенный инструмент для управления сетевым экраном (или брандмауэром). Его главная задача — фильтровать входящий интернет-трафик, отсекая любые несанкционированные попытки подключения.
+> Проведем диагностику системы, развернем UFW, если его не оказалось в системе, и настроим правила доступа. Главный принцип: «Запрещено всё, что явно не разрешено». Закроем все порты, оставив доступ только для SSH, чтобы вы не потеряли связь с сервером, а также для стандартных веб-протоколов HTTP и HTTPS
+
+#### Проверка статуса UFW
+
+```bash
+# Проверяем, установлен ли UFW
+ufw status 2>/dev/null && echo "✅ UFW установлен" || echo "❌ UFW не установлен"
+```
+
+#### Устанавливаем UFW, если не установлен
+
+```bash
+# Устанавливаем UFW
+apt install ufw -y
+
+# Проверяем установку
+ufw status
+```
+
+#### Проверяем конфигурацию UFW
+
+```bash
+# Проверяем текущий статус
+ufw status verbose
+
+# Проверяем какие порты уже открыты
+ufw status numbered
+```
+
+> ℹ️ UFW Firewall как правило, если установлен то находится в выключенном состоянии `Status: inactive`. Далее включаем его и настраиваем доступ только по определённым портам.
+
 #### Настройка UFW
 
 ```bash
@@ -473,7 +476,7 @@ To                         Action      From
 
 
 <details>
-<summary>4. 🏹 Утилита fail2ban</summary>
+<summary>5. 🏹 Утилита fail2ban</summary>
 ### 🏹 Утилита fail2ban
 
 Проверка наличия fail2ban
@@ -778,7 +781,7 @@ docker exec -w /etc/caddy caddy caddy reload
 <summary>❸ 🚪 Прячем Portainer</summary>
 <br>
   
-Мы настроили доступ к Portiner через Caddy, через обычный 443 HTTPS порт по адресу `https://megaserver.ru/portainer/`<br><br>
+Мы настроили доступ к Portainer через Caddy, через обычный 443 HTTPS порт по адресу `https://megaserver.ru/portainer/`<br><br>
 Но мы всё ещё можем попасть в Portainer по IP адресу сервера и порту - `https://111.22.55.222:9000`<br><br>
 
 Почему мы изначально при включенном firewall и ограниченом наборе портов смогли попасть в Portainer на 9000 порту? Docker полностью игнорирует UFW и обходит его правила по умолчанию. Любой контейнер, который запускается с флагом `-p ` (проброс портов), автоматически становится доступен всему миру, вопреки включенному UFW Firewall. Одним из способов этого избежать является заставить Portainer слушать 9000 порт только на localhost (127.0.0.1).<br><br>
