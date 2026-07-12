@@ -70,7 +70,7 @@
 
 ---
 
-## 🪏 Настрока сервера
+## 🔑 Настрока сервера
 
 <details>
 <summary>❶ 🔄 Обновление системы</summary>
@@ -267,7 +267,8 @@ PermitRootLogin no
 <details>
 <summary>2. 🔃 Переключаем SSH на новый порт</summary>
 <br>
-Когда сервер появляется в сети, он сразу становится виден тысячам автоматических сканеров (ботов). Они непрерывно прочесывают адресное пространство интернета в поисках легкой добычи. Перенос SSH со стандартного 22-го порта позволяет кардинально снизить фоновый шум и нагрузку на систему: роботы-сканеры в 99% случаев проверяют только стандартные точки входа. Поэтому SSH с 22-го порта мы переносим на любой другой свободный порт. Ниже приведена таблица стандартных, условно зарезервированных портов — ознакомьтесь с ней, чтобы случайно не занять адрес другой важной службы, и выберите для себя любой другой свободный номер.
+
+> Когда сервер появляется в сети, он сразу становится виден тысячам автоматических сканеров (ботов). Они непрерывно прочесывают адресное пространство интернета в поисках легкой добычи. Перенос SSH со стандартного 22-го порта позволяет кардинально снизить фоновый шум и нагрузку на систему: роботы-сканеры в 99% случаев проверяют только стандартные точки входа. Поэтому SSH с 22-го порта мы переносим на любой другой свободный порт. Ниже приведена таблица стандартных, условно зарезервированных портов — ознакомьтесь с ней, чтобы случайно не занять адрес другой важной службы, и выберите для себя любой другой свободный номер.
 <br>
 
 ```bash
@@ -653,14 +654,15 @@ mkdir -p /etc/caddy
 ```
 
 Создаём файл Caddyfile с настройками для Caddy:
+- впишите свой рабочий email, туда будут приходить письма в случае проблем с сертификатами
+- впишите свой домен или субдомен ведущий на сервер
+- адрес ведущий к Portainer можно придумать свой, не такой очевидный
+
 ```bash
 # Создаём Caddyfile
 cat > /etc/caddy/Caddyfile << 'EOF'
 {
     email your-email@example.com
-}
-:80, :443 {
-    abort
 }
 
 megaserver.ru {
@@ -669,21 +671,26 @@ megaserver.ru {
         format console
     }
 
-    # Скрываем присутствие Caddy наружу
-    header -Server
-
-    encode zstd gzip
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        X-Content-Type-Options nosniff
+        X-Frame-Options SAMEORIGIN
+        Referrer-Policy strict-origin-when-cross-origin
+        -Server
+        -X-Powered-By
+        }
 
     handle_path /portainer/* {
-        header -X-Powered-By
         reverse_proxy 127.0.0.1:9000
     }
 
     handle {
         root * /srv
+        encode zstd gzip
         try_files {path} {path}/ /index.html
         file_server
     }
+
 }
 EOF
 ```
@@ -737,20 +744,15 @@ volumes:
 
 Проверяем, что по адресам:
 
-`https://megaserver.ru` - открывается тот одинойкий HTML-заглушка
+`https://megaserver.ru` - открывается HTML-заглушка
 
 `https://megaserver.ru/portainer/` - открывается Portainer
 <br><br>
 ➕ Дополнительно:
 <br><br>
-Ставим нормальный текстовый редактор для консоли:
-```bash
-apt install micro
-```
-<br><br>
 Редактирование конфигурации Caddy в Caddyfile:
 ```bash
-micro /etc/caddy/Caddyfile
+nano /etc/caddy/Caddyfile
 ```
 <br><br>
 Автоформатирование Caddyfile (отступы, пробелы):
@@ -789,8 +791,8 @@ docker exec -w /etc/caddy caddy caddy reload
 Удаляем Portainer и тут же устанавливаем с другими настройками:
 
 ```bash
-# Удаление Portainer
-docker rm -f portainer
+# Останавливаем и удаляем Portainer
+docker stop portainer && docker rm -f portainer
 
 # Установка без доступа по IP сервера
 docker run -d \
@@ -800,8 +802,13 @@ docker run -d \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -v portainer_data:/data \
   portainer/portainer-ce:lts
-```
 
+# Проверяем
+docker ps | grep portainer
+docker logs portainer --tail 10
+```
+<br>
+❗Внимание, данный ⬆️ блок ⬆️ команд ⬆️ можно спойкойно использовать для обновления версии Portainer.
 </details>
 <br>
 
