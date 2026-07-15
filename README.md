@@ -1003,15 +1003,32 @@ docker exec caddy find /data/caddy/certificates -type f -name "*.crt" -o -name "
   
 GitHub [OpenLibreCommunity/olcRTC](https://github.com/openlibrecommunity/olcrtc) | 4PDA (через VPN) [пост-инструкция](https://4pda.to/forum/index.php?showtopic=1110469&st=5960#entry143330149) | YouTube [ролик про olcRTC](https://www.youtube.com/watch?v=9FmyzDnwQ5E)
 </details>
+<details>
+<summary>📃 White List (vk-turn-proxy)</summary>
+<br>
+  
+GitHub [cacggghp/vk-turn-proxy](https://github.com/cacggghp/vk-turn-proxy)
+</details>
 <br>
 
 ---
 
 ## 🔗 Полезные ссылки 🚑
 
+
+<details>
+<summary>🏃 Быстрые решения</summary>
+<br>
+
+> Настрока любого Xray VPN-сервер в 4 клика, получаем сразу готовые профили для подключение. Скрипт и гайд от владельца VPN сервиса.
+
+GitHub [RustForNew/XRay-Server-Wizard](https://github.com/RustForNew/xray-server-wizard) | YouTube [информация + гайд](https://www.youtube.com/watch?v=YQpa_0-6xC0)
+
+
+</details>
+
 <details>
 <summary>🆓 Бесплатные VPN сервера</summary>
-<br>
 
 > Раз в час обновляемый огромный список VLESS серверов
 
