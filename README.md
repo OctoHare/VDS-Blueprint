@@ -1020,5 +1020,10 @@ GitHub [Zieng2/WL](https://github.com/zieng2/wl)
 > Автоматически обновляемые VPN-конфиги
 
 GitHub [whoahaow/rjsxrd](https://github.com/whoahaow/rjsxrd)
+
+> Бесплатные VPN-конфигурации, работающие в РФ
+
+GitHub [Igareck/VPN-Configs-for-Russia](https://github.com/igareck/vpn-configs-for-russia)
+
 </details>
 <br>
