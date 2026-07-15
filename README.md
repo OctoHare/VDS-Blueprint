@@ -905,6 +905,77 @@ docker logs portainer --tail 10
 ## 🏰 Установка инструментов
 
 <details>
+<summary>MTProto прокси для Telegram</summary>
+
+#### Устанавливаем в контейнер прокси
+
+[Версия от 9seconds/mtg](https://github.com/9seconds/mtg)
+
+1. Генерируем секрет с вашим адресом:
+
+```bash
+docker run --rm nineseconds/mtg:2 generate-secret --hex tg.megaserver.ru
+```
+Получаем строку вида `ee76xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`
+
+
+2. Готовим файл с параметрами:
+
+- используйте серкрет сгенерированный выше (строка `secret`)
+- укажите IP вашего сервера (строка `public-ipv4`)
+- укажите порт (строка `bind-to`) на котором будет ваш прокси
+<br>
+
+```bash
+# Создаём файл с параметрами mtg.toml
+cat > /etc/mtg.toml << 'EOF'
+secret = "ee76xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+bind-to = "0.0.0.0:6666"
+public-ipv4 = "<IP адрес сервера>"
+tolerate-time-skewness = "10s"
+
+[anti-dpi]
+enabled = true
+drs = true
+
+[logger]
+level = "info"
+
+[stats.prometheus]
+enabled = true
+bind-to = "127.0.0.1:3129"
+http-path = "/"
+metric-prefix = "mtg"
+EOF
+```
+
+3. Ставим контейнер с образом `nineseconds/mtg:2`:
+
+- `Stacks` → `+ Add stack`
+- Name: `mtg`
+- Web editor:
+
+```bash
+services:
+  mtproto:
+    image: nineseconds/mtg:2
+    container_name: mtg
+    restart: unless-stopped
+    network_mode: "host"
+    volumes:
+      - /etc/mtg.toml:/config/config.toml:ro
+```
+
+4. Проверяем видимость Telegram для прокси:
+
+```bash
+docker run --rm nineseconds/mtg:2 doctor /config/config.toml
+```
+
+---
+</details>
+
+<details>
 <summary>Панель MHSanaei/3x-ui</summary>
 
 ### Обновление системы
