@@ -1016,5 +1016,9 @@ GitHub [OpenLibreCommunity/olcRTC](https://github.com/openlibrecommunity/olcrtc)
 > Раз в час обновляемый огромный список VLESS серверов
 
 GitHub [Zieng2/WL](https://github.com/zieng2/wl)
+
+> Автоматически обновляемые VPN-конфиги
+
+GitHub [whoahaow/rjsxrd](https://github.com/whoahaow/rjsxrd)
 </details>
 <br>
