@@ -978,8 +978,6 @@ docker run --rm nineseconds/mtg:2 doctor /config/config.toml
 <details>
 <summary>Панель MHSanaei/3x-ui</summary>
 
-### Обновление системы
-
 Ищем сертифкаты в контейнере Caddy:
 ```bash
 docker exec caddy find /data/caddy/certificates -type f -name "*.crt" -o -name "*.key"
@@ -989,7 +987,22 @@ docker exec caddy find /data/caddy/certificates -type f -name "*.crt" -o -name "
 </details>
 <br>
 
+
 ```text
 На данном этапе
 ```
+<br>
+
+---
+
+## 🚧 Интересные проекты (не тестировались) ⚠️
+
+<details>
+<summary>📃 White List (olcRTC TCP-over-WebRTC)</summary>
+<br>
+  
+GitHub [OpenLibreCommunity/olcRTC](https://github.com/openlibrecommunity/olcrtc) | 4PDA (через VPN) [пост-инструкция](https://4pda.to/forum/index.php?showtopic=1110469&st=5960#entry143330149) | YouTube [ролик про olcRTC](https://www.youtube.com/watch?v=9FmyzDnwQ5E)
+
+---
+</details>
 <br>
