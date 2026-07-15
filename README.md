@@ -1002,7 +1002,19 @@ docker exec caddy find /data/caddy/certificates -type f -name "*.crt" -o -name "
 <br>
   
 GitHub [OpenLibreCommunity/olcRTC](https://github.com/openlibrecommunity/olcrtc) | 4PDA (через VPN) [пост-инструкция](https://4pda.to/forum/index.php?showtopic=1110469&st=5960#entry143330149) | YouTube [ролик про olcRTC](https://www.youtube.com/watch?v=9FmyzDnwQ5E)
+</details>
+<br>
 
 ---
+
+## 🔗 Полезные ссылки 🚑
+
+<details>
+<summary>🆓 Бесплатные VPN сервера</summary>
+<br>
+
+> Раз в час обновляемый огромный список VLESS серверов
+
+GitHub [Zieng2/WL](https://github.com/zieng2/wl)
 </details>
 <br>
