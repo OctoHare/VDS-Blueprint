@@ -1009,6 +1009,12 @@ GitHub [OpenLibreCommunity/olcRTC](https://github.com/openlibrecommunity/olcrtc)
   
 GitHub [cacggghp/vk-turn-proxy](https://github.com/cacggghp/vk-turn-proxy)
 </details>
+<details>
+<summary>⚙️ Caddy WEB UI (веб интерфейс)</summary>
+<br>
+  
+GitHub [ZackWag/Caddy-UI](https://github.com/zackwag/caddy-ui)
+</details>
 <br>
 
 ---
