@@ -153,10 +153,6 @@ apt update
 apt upgrade -y
 ```
 ```bash
-# Удаление ненужных зависимостей
-apt autoremove -y
-```
-```bash
 # Очистка кэша
 apt autoclean
 ```
@@ -164,7 +160,7 @@ apt autoclean
 Или одной командой:
 
 ```bash
-apt update && apt upgrade -y && apt autoremove -y && apt autoclean
+apt update && apt upgrade -y && apt autoclean
 ```
 
 После обновления проверим, требуется ли перезагрузка ядра:
