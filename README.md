@@ -1015,6 +1015,13 @@ GitHub [cacggghp/vk-turn-proxy](https://github.com/cacggghp/vk-turn-proxy)
   
 GitHub [ZackWag/Caddy-UI](https://github.com/zackwag/caddy-ui)
 </details>
+<details>
+<summary>⚙️ 3DP-Manager (веб интерфейс)</summary>
+  
+> Утилита для автогенерации инбаундов к панели 3X-UI, формирования единых подписок, управления несколькими 3X-UI нодами и настройки relay-перенаправления трафика с промежуточных серверов на основные.
+  
+GitHub [DenPiligrim/3DP-Manager](https://github.com/denpiligrim/3dp-manager)
+</details>
 <br>
 
 ---
