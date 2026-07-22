@@ -1023,6 +1023,13 @@ GitHub [ZackWag/Caddy-UI](https://github.com/zackwag/caddy-ui)
   
 GitHub [DenPiligrim/3DP-Manager](https://github.com/denpiligrim/3dp-manager)
 </details>
+<details>
+<summary>⚙️ Туннель на базе RSTUN между серверами</summary>
+  
+> Скрипт для создания туннеля на базе [rstun](https://github.com/search?q=rstun&type=repositories) между сервера, подойдёт для организации каскада. В ролике показан пример с панелью 3X-UI.
+  
+GitHub [Erfan-XRay/TrustTunnel](https://github.com/Erfan-XRay/TrustTunnel) (не путать с протоколом [TrustTunnel](https://github.com/TrustTunnel/TrustTunnel)) | YouTube [ролик-инструкция](https://www.youtube.com/watch?v=QD2xXu9DuSw)
+</details>
 <br>
 
 ---
