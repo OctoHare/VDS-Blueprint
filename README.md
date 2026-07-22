@@ -200,7 +200,12 @@ reboot
 hostnamectl set-hostname msk.megaserver.ru
 ```
 
-### Универсальная команда смены hostname
+Смотрим содержимое файла `/etc/hosts`
+
+```bash
+# Смотрим файл hosts
+cat /etc/hosts
+```
 
 Одна команда заменяет hostname и убирает старые алиасы из `/etc/hosts`:
 
