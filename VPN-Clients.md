@@ -44,3 +44,5 @@ WireGuard
 OpenVPN Connect
 
 Outline
+
+TrustTunnel
