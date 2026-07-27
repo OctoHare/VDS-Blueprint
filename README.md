@@ -817,24 +817,30 @@ docker logs portainer --tail 20
 
 > Конфигурационный файл веб-сервера — Caddyfile — устроен логично и последовательно.<br>
 > В первой его части мы задаем заголовки безопасности (Headers), которые выполняют роль жестких инструкций для браузера посетителя. Они кардинально снижают риски перехвата данных, запрещают подмену типов файлов и защищают интерфейс управления от скрытого встраивания в чужие мошеннические страницы.<br>
-> Затем мы настраиваем блок handle_path /portainer/*: он перехватывает запросы по этому адресу и незаметно перенаправляет их на внутренний порт 9000, который мы настроили на прошлом шаге.<br>
+> Затем мы настраиваем блок `handle_path /portainer/*`: он перехватывает запросы по этому адресу и незаметно перенаправляет их на внутренний порт 9000, который мы настроили на прошлом шаге.<br>
 > Во всех остальных случаях сервер будет просто показывать скромную заглушку «Сайт на реконструкции» из папки `/var/www/html`.
-
-
 
 [Официальный сайт](https://caddyserver.com) | [Описание](https://devtrends.ru/go/caddyserver-caddy)
 
 Создаём директории для настроек и для сайта-заглушки:
 ```bash
-# Создаём директории
+# Создаём каталоги
+
+# Для сайта-заглушки
 mkdir -p /var/www/html
+
+# Для конфигурационного файла Caddy
 mkdir -p /etc/caddy
+
+# Для сертификатов
+mkdir -p /etc/caddy/data
 ```
 
-Создаём файл Caddyfile с настройками для Caddy:
-- впишите свой рабочий email, туда будут приходить письма в случае проблем с сертификатами
-- впишите свой домен или субдомен ведущий на сервер
-- адрес ведущий к Portainer можно придумать свой, не такой очевидный
+Создаём файл `Caddyfile` с настройками для Caddy:
+- впишите свой действующий email, на него будут приходить письма в случае проблем с сертификатами
+- впишите свой домен или субдомен ведущий на сервер, который вы уже прописали в панели управления DNS записями своего домена
+- придумайте и впишите адрес ведущий к Portainer (в примере `/portainer/`). Адрес должен быть не очевидный, но запоминающийся вам.
+- придумайте и впишите адрес ведущий к панели 3X-UI (в примере `/3xpanel/`). Адрес должен быть не очевидный, но запоминающийся вам.
 
 ```bash
 # Создаём Caddyfile
@@ -860,6 +866,10 @@ megaserver.ru {
 
     handle_path /portainer/* {
         reverse_proxy 127.0.0.1:9000
+    }
+
+    handle /3xpanel/* {
+        reverse_proxy 127.0.0.1:2525
     }
 
     handle {
@@ -896,11 +906,13 @@ ls -la /etc/caddy/
 ls -la /var/www/html/
 ```
 
-Далее для установки Caddy переходим в Portainer:
 
-1. `Stacks` → `+ Add stack`
-2. Name: `caddy`
-3. Web editor:
+Далее для установки веб-сервера Caddy переходим в Portainer:
+
+1. Раздел "**Stacks**"
+2. Кнопка "**+ Add stack**" вверху справа
+3. Задаём имя - Name: `caddy`
+4. В окном Web editor вставляем:
 
 ```bash
 services:
@@ -908,17 +920,26 @@ services:
     image: caddy:latest
     container_name: caddy
     restart: unless-stopped
+
     network_mode: host
+
     volumes:
-      - /etc/caddy/Caddyfile:/etc/caddy/Caddyfile
-      - /var/www/html:/srv
-      - caddy_data:/data
-      - caddy_config:/config
+      - /etc/caddy/Caddyfile:/etc/caddy/Caddyfile    # Файл настроек Caddyfile по адресу /etc/caddy/
+      - /var/www/html:/var/www/html                  # Папка /var/www/html для index.html сайта-заглушки
+      - /etc/caddy/data:/data                        # Сертификаты домена лежат в /etc/caddy/data
+      - caddy_config:/config                         # Системный кэш Caddy внутри контейнера
+
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fI http://127.0.0.1:2019/metrics"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
 
 volumes:
-  caddy_data:
   caddy_config:
 ```
+5. Кнопка "**Deploy the stack**" внизу слева
 
 Проверяем, что по адресам:
 
@@ -1069,7 +1090,7 @@ docker run --rm nineseconds/mtg:2 doctor /config/config.toml
 </details>
 
 <details>
-<summary>Панель MHSanaei/3x-ui</summary>
+<summary>📟 Панель 3X-UI от MHSanaei</summary>
 
 Ищем сертифкаты в контейнере Caddy:
 ```bash
