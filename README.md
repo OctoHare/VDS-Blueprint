@@ -245,6 +245,37 @@ reboot
 </details>
 
 <details>
+<summary>🟢 Тестируем сервер</summary>
+
+На GitHub [Nokola-Tesla/censorcheck](https://github.com/Nokola-Tesla/censorcheck) и в Telegram [@TracerLab](https://t.me/tracerlab) были найдены удобные скрипты для тестирование скорости сервера и окружающих его блокировок.
+
+> ⬇️Скрипт-чекер для проверки блокировок и цензуры на сервере. Будет полезен для VPS/VDS с локацией РФ. Скрипт анализирует, заблокирован ли тестируемый сервис на разных уровнях (DNS, IP, HTTP/HTTPS, DPI, REGIONAL), и выводит результаты в таблице.
+
+```bash
+wget -qO- censorcheck.tlab.pw | bash
+```
+<br>
+
+> ⬇️Скрипт предназначен для тестирования скорости интернет-канала VPS/VDS сервера с использованием iPerf3 в многопоточном режиме, что соответствует методике Speedtest.net по нагрузке канала.
+
+```bash
+wget -qO- bench.tlab.pw | bash
+```
+> ⬆️Команда для запуска теста к серверам в РФ
+
+<br>
+
+```bash
+wget -qO- speed.tlab.pw | bash
+```
+> ⬆️Команда для запуска теста к серверам в US/EU/Asia
+
+Подробнее о сриптах можно прочесть на GitHub и в Telegram
+
+<br><br>
+</details>
+
+<details>
 <summary>❷ 🏷️ Настройка hostname</summary>
 <br>
 
