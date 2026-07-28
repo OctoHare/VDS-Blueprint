@@ -1,3 +1,5 @@
+![Phoenix Project](imgs/phoenix.webp)
+
 # Phoenix - до последнего вздоха и снова!
 
 ---
