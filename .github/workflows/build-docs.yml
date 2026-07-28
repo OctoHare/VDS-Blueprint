@@ -1,0 +1,36 @@
+name: Build README from docs/index.md
+
+on:
+  push:
+    branches:
+      - main # Укажи master, если твоя главная ветка называется master
+    paths:
+      - 'docs/**' # Срабатывает при редактировании любого файла в папке docs/
+
+jobs:
+  build-readme:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install markdown-include
+        run: npm install -g markdown-include
+
+      - name: Build README.md
+        run: |
+          npx markdown-include -e README.md docs/index.md
+
+      - name: Commit and push updated README.md
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "docs: auto-build README.md from docs/index.md [skip ci]"
+          file_pattern: "README.md"
