@@ -221,8 +221,12 @@ EOF
 systemctl daemon-reload
 ```
 
+Чтобы диск не забивали системные логи, пропиши жесткий лимит логов ОС:
 
-
+```bash
+sed -i 's/#SystemMaxUse=/SystemMaxUse=200M/' /etc/systemd/journald.conf
+systemctl restart systemd-journald
+```
 
 После обновления проверим, требуется ли перезагрузка ядра:
 
@@ -401,6 +405,22 @@ usermod -aG docker hyperadmin
 # Проверяем
 docker --version
 ```
+
+Чтобы логи не переполнялись один раз прописываешь конфиг на самом сервере, и Docker принудительно ограничивает размер логов для всех контейнеров
+```bash
+cat <<EOF > /etc/docker/daemon.json
+{
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "10m",
+    "max-file": "3"
+  }
+}
+EOF
+
+systemctl restart docker
+```
+
 <br><br>
 </details>
 
