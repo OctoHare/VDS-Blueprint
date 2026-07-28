@@ -26,8 +26,7 @@ jobs:
         run: npm install -g markdown-include
 
       - name: Build README.md
-        run: |
-          npx markdown-include -e README.md docs/index.md
+        run: npx markdown-include docs/markdown-include.json
 
       - name: Commit and push updated README.md
         uses: stefanzweifel/git-auto-commit-action@v5
