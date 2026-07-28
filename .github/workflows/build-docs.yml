@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main # Замени на master, если ветка master
+      - main # Замени на master, если главная ветка master
     paths:
       - 'docs/**'
 
@@ -24,53 +24,7 @@ jobs:
           node-version: '20'
 
       - name: Compile README.md
-        run: |
-          node -e '
-          const fs = require("fs");
-          const path = require("path");
-
-          function processIncludes(filePath) {
-            let content = fs.readFileSync(filePath, "utf8");
-            
-            // 1. Полная чистка спецсимволов и переносов
-            content = content.replace(/\u00a0/g, " ").replace(/\r\n/g, "\n");
-            
-            if (filePath === "docs/index.md") {
-              console.log("--- СОДЕРЖИМОЕ docs/index.md ---");
-              console.log(content);
-              console.log("---------------------------------");
-            }
-            
-            // 2. Всеядная регулярка: подхватывает <!-- include: "file" -->, <!--include:file-->, <!-- include file -->
-            const includeRegex = /<!--\s*include:?\s*["'’`]?([^"':’`\s-->]+)["'’`]?\s*-->/gi;
-            
-            let matchCount = 0;
-            content = content.replace(includeRegex, (match, rawIncludePath) => {
-              matchCount++;
-              const includePath = rawIncludePath.replace(/\\/g, "/");
-              const fullPath = path.resolve(process.cwd(), includePath);
-              
-              if (fs.existsSync(fullPath)) {
-                console.log(`[OK] Подставили файл: ${includePath}`);
-                return processIncludes(fullPath);
-              } else {
-                console.warn(`[WARN] Файл не найден: ${includePath} (искали в: ${fullPath})`);
-                return `<!-- [ERROR: File not found: ${includePath}] -->`;
-              }
-            });
-            
-            if (filePath === "docs/index.md") {
-              console.log(`Найдено совпадений include: ${matchCount}`);
-            }
-            
-            return content;
-          }
-
-          console.log("=== Старт сборки ===");
-          const compiledContent = processIncludes("docs/index.md");
-          fs.writeFileSync("README.md", compiledContent, "utf8");
-          console.log("=== README.md успешно обновлен ===");
-          '
+        run: node .github/scripts/build.js
 
       - name: Commit and push updated README.md
         uses: stefanzweifel/git-auto-commit-action@v5
