@@ -9,31 +9,37 @@ function processIncludes(filePath) {
 
   let content = fs.readFileSync(filePath, "utf8");
 
-  // 1. ЖЕСТКАЯ ОЧИСТКА: превращаем ВСЕ невидимые/неразрывные пробелы в обычные
-  content = content.replace(/[\u00A0\u1680\u180E\u2000-\u200B\u202F\u205F\u3000\uFEFF]/g, " ");
+  // Очистка переносов строк
   content = content.replace(/\r\n/g, "\n");
 
-  // 2. Регулярка, которой вообще пофиг на то, какие пробелы вокруг пути
-  // Ищет: <!-- [любые пробелы] include: [любые пробелы] путь [любые пробелы] -->
-  const includeRegex = /<!--\s*include:\s*([^\s-->]+)\s*-->/gi;
+  // 1. Находим ЛЮБОЙ комментарий, где есть слово include
+  const commentRegex = /<!--[\s\S]*?include[\s\S]*?-->/gi;
 
   let matchCount = 0;
-  content = content.replace(includeRegex, (match, rawIncludePath) => {
+  content = content.replace(commentRegex, (fullComment) => {
+    // 2. Достаем из этого комментария сам путь (все символы кроме пробелов, кавычек и стрелок)
+    const pathMatch = fullComment.match(/include\s*:?\s*["'’`]?([^\s"':’`>]+)/i);
+
+    if (!pathMatch || !pathMatch[1]) {
+      return fullComment; // Если это был не наш инклюд, оставляем как есть
+    }
+
     matchCount++;
-    const includePath = rawIncludePath.trim().replace(/\\/g, "/");
+    const rawPath = pathMatch[1];
+    const includePath = rawPath.replace(/\\/g, "/");
     const fullPath = path.resolve(process.cwd(), includePath);
 
     if (fs.existsSync(fullPath)) {
       console.log(`[OK] Подставили: ${includePath}`);
-      return processIncludes(fullPath); // Рекурсия на случай вложенных файлов
+      return processIncludes(fullPath);
     } else {
-      console.warn(`[WARN] Файл не найден: ${includePath}`);
+      console.warn(`[WARN] Файл не найден по пути: ${includePath} (абсолютный: ${fullPath})`);
       return `<!-- [ERROR: File not found: ${includePath}] -->`;
     }
   });
 
   if (filePath === "docs/index.md") {
-    console.log(`Найдено и заменено инклюдов: ${matchCount}`);
+    console.log(`Успешно обработано инклюдов: ${matchCount}`);
   }
 
   return content;
