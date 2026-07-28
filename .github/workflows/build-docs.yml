@@ -1,18 +1,18 @@
 name: Build README from docs/index.md
 
 on:
-  workflow_dispatch: # Позволяет запускать сборку вручную из вкладки Actions
+  workflow_dispatch:
   push:
     branches:
-      - main # Замени на master, если твоя главная ветка называется master
+      - main # Замени на master, если ветка master
     paths:
-      - 'docs/**' # Срабатывает при любых изменениях в папке docs/
+      - 'docs/**'
 
 jobs:
   build-readme:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # Дает право боту делать commit и push в репозиторий
+      contents: write
 
     steps:
       - name: Checkout repository
@@ -32,16 +32,21 @@ jobs:
           function processIncludes(filePath) {
             let content = fs.readFileSync(filePath, "utf8");
             
-            // 1. Очищаем неразрывные пробелы (из-за копипаста) и нормализуем переносы строк
+            // 1. Полная чистка спецсимволов и переносов
             content = content.replace(/\u00a0/g, " ").replace(/\r\n/g, "\n");
             
-            // 2. Ищем все теги <!-- include: ... --> с любыми пробелами
-            const includeRegex = /<!--\s*include:\s*([^\s-->]+)\s*-->/gi;
+            if (filePath === "docs/index.md") {
+              console.log("--- СОДЕРЖИМОЕ docs/index.md ---");
+              console.log(content);
+              console.log("---------------------------------");
+            }
+            
+            // 2. Всеядная регулярка: подхватывает <!-- include: "file" -->, <!--include:file-->, <!-- include file -->
+            const includeRegex = /<!--\s*include:?\s*["'’`]?([^"':’`\s-->]+)["'’`]?\s*-->/gi;
             
             let matchCount = 0;
             content = content.replace(includeRegex, (match, rawIncludePath) => {
               matchCount++;
-              // Нормализуем путь для любых ОС (заменяем \ на /)
               const includePath = rawIncludePath.replace(/\\/g, "/");
               const fullPath = path.resolve(process.cwd(), includePath);
               
@@ -49,7 +54,7 @@ jobs:
                 console.log(`[OK] Подставили файл: ${includePath}`);
                 return processIncludes(fullPath);
               } else {
-                console.warn(`[WARN] Файл не найден: ${includePath} (абсолютный путь: ${fullPath})`);
+                console.warn(`[WARN] Файл не найден: ${includePath} (искали в: ${fullPath})`);
                 return `<!-- [ERROR: File not found: ${includePath}] -->`;
               }
             });
