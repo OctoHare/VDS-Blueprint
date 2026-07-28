@@ -3,9 +3,9 @@ name: Build README from docs/index.md
 on:
   push:
     branches:
-      - main # Укажи master, если твоя главная ветка называется master
+      - main # Укажи master, если главная ветка называется master
     paths:
-      - 'docs/**' # Срабатывает при редактировании любого файла в папке docs/
+      - 'docs/**'
 
 jobs:
   build-readme:
@@ -22,11 +22,36 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install markdown-include
-        run: npm install -g markdown-include
+      - name: Compile README.md
+        run: |
+          node -e '
+          const fs = require("fs");
+          const path = require("path");
 
-      - name: Build README.md
-        run: npx markdown-include docs/markdown-include.json
+          function processIncludes(filePath) {
+            let content = fs.readFileSync(filePath, "utf8");
+            
+            // Ищем конструкции <!-- include: путь/к/файлу.md -->
+            const includeRegex = /<!--\s*include:\s*([^\s-->]+)\s*-->/g;
+            
+            content = content.replace(includeRegex, (match, includePath) => {
+              const fullPath = path.resolve(process.cwd(), includePath);
+              if (fs.existsSync(fullPath)) {
+                // Рекурсивно подставляем, если внутри включаемого файла тоже есть include
+                return processIncludes(fullPath);
+              } else {
+                console.warn(`[WARN] Файл не найден: ${includePath}`);
+                return `<!-- [ERROR: File not found: ${includePath}] -->`;
+              }
+            });
+            
+            return content;
+          }
+
+          const compiledContent = processIncludes("docs/index.md");
+          fs.writeFileSync("README.md", compiledContent, "utf8");
+          console.log("README.md успешно собран!");
+          '
 
       - name: Commit and push updated README.md
         uses: stefanzweifel/git-auto-commit-action@v5
