@@ -1,5 +1,5 @@
 const fs = require("fs");
-const path = formatPath => formatPath.replace(/\\/g, "/");
+const path = require("path");
 
 function processIncludes(filePath) {
   if (!fs.existsSync(filePath)) {
@@ -10,7 +10,7 @@ function processIncludes(filePath) {
   let content = fs.readFileSync(filePath, "utf8");
   content = content.replace(/\r\n/g, "\n");
 
-  // Отладка: покажем, с чего начинается файл
+  // Отладка: покажем начало файла
   if (filePath === "docs/index.md") {
     console.log("=== НАЧАЛО ТЕКСТА ИЗ index.md ===");
     console.log(content.substring(0, 300));
