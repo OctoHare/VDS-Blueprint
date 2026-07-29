@@ -22,7 +22,14 @@
 ## Дополнительные материалы
 
 <details>
-<summary><b>📱 Клиенты VPN (Настройка и подключение)</b></summary>
+<summary><b>🚧 Интересные проекты (не тестировались)</b></summary>
+
+<!-- include: Not-Tested.md -->
+
+</details>
+
+<details>
+<summary><b>📱 Клиенты VPN (Настройка, подключение, подписки)</b></summary>
 
 <!-- include: docs/VPN-Clients.md -->
 
