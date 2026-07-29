@@ -6,16 +6,23 @@ console.log("=== Старт сборки README.md ===");
 // 1. Читаем исходный index.md целиком
 let content = fs.readFileSync("docs/index.md", "utf8").replace(/\r\n/g, "\n");
 
-// 2. Точечно ищем только те комментарии, в которых есть слово include
-const includeRegex = /<!--\s*include:\s*([^\s-->]+)\s*-->/gi;
+// 2. Всеядный поиск: ищет любой комментарий со словом include и достает оттуда путь
+const commentRegex = /<!--[\s\S]*?include[\s\S]*?-->/gi;
 
-content = content.replace(includeRegex, (match, rawIncludePath) => {
-  const includePath = rawIncludePath.replace(/\\/g, "/");
+content = content.replace(commentRegex, (fullComment) => {
+  // Достаем путь из комментария (игнорируем лишние пробелы и кавычки)
+  const pathMatch = fullComment.match(/include\s*:?\s*["'’`]?([^\s"':’`>]+)/i);
+
+  if (!pathMatch || !pathMatch[1]) {
+    return fullComment; // Если это не наш инклюд (например, шапка), оставляем как есть
+  }
+
+  const rawPath = pathMatch[1];
+  const includePath = rawPath.replace(/\\/g, "/");
   const fullPath = path.resolve(process.cwd(), includePath);
 
   if (fs.existsSync(fullPath)) {
-    console.log(`[OK] Подставили: ${includePath}`);
-    // Возвращаем содержимое включаемого файла
+    console.log(`[OK] Подставили файл: ${includePath}`);
     return fs.readFileSync(fullPath, "utf8").replace(/\r\n/g, "\n");
   } else {
     console.warn(`[WARN] Файл не найден: ${includePath}`);
@@ -29,8 +36,8 @@ const noticeBanner = `<!--
 https://github.com/OctoHare/VDS-Blueprint
 -->\n\n`;
 
-// 4. Склеиваем плашку и обработанный текст index.md (сохраняя всё, что было до инклюдов)
+// 4. Склеиваем плашку и обработанный текст
 const finalContent = noticeBanner + content;
 
 fs.writeFileSync("README.md", finalContent, "utf8");
-console.log("=== README.md успешно собран! ===");
+console.log("=== README.md успешно собран со вставками! ===");
