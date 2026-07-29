@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-console.log("=== Старт сборки README.md (финальная версия) ===");
+console.log("=== Старт сборки README.md (ультра-поиск) ===");
 
 if (!fs.existsSync("docs/index.md")) {
   console.error("[ERROR] Файл docs/index.md не найден!");
@@ -14,11 +14,11 @@ const lines = rawIndex.replace(/\r\n/g, "\n").split("\n");
 let outputLines = [];
 
 for (let line of lines) {
-  // 1. Превращаем ВСЕ типы пробелов и невидимых символов в обычные пробелы
-  let cleanedLine = line.replace(/[\u00A0\u1680\u180E\u2000-\u200B\u202F\u205F\u3000\uFEFF]/g, " ").trim();
-  
-  // 2. Ищем инклюд с абсолютной толерантностью к любым пробелам внутри
-  const match = cleanedLine.match(/^<!--\s*include:\s*([^\s-->]+)\s*-->$/i);
+  // Убиваем абсолютно все типы невидимых пробелов по всей строке
+  const cleanLine = line.replace(/[\u00A0\u1680\u180E\u2000-\u200B\u202F\u205F\u3000\uFEFF]/g, " ");
+
+  // Ищем include в ЛЮБОМ месте строки (без привязки к началу через ^)
+  const match = cleanLine.match(/<!--\s*include:\s*([^\s-->]+)\s*-->/i);
 
   if (match) {
     const includePath = match[1].replace(/\\/g, "/");
@@ -33,14 +33,12 @@ for (let line of lines) {
       outputLines.push(`<!-- [ERROR: File not found: ${includePath}] -->`);
     }
   } else {
-    // Обычная строка — оставляем оригинал
     outputLines.push(line);
   }
 }
 
 const compiledBody = outputLines.join("\n");
 
-// Добавляем плашку наверх
 const noticeBanner = `<!-- 
 Данный документ из репозитория
 https://github.com/OctoHare/VDS-Blueprint
@@ -49,4 +47,4 @@ https://github.com/OctoHare/VDS-Blueprint
 const finalContent = noticeBanner + compiledBody;
 
 fs.writeFileSync("README.md", finalContent, "utf8");
-console.log("=== README.md успешно собран со всеми вставками! ===");
+console.log("=== README.md успешно собран! ===");
