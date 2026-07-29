@@ -15,8 +15,6 @@
 
 ---
 
-# 🔒 Безопасность SSH и защита сервера
-
 <!-- include: docs/SSH-Security.md -->
 
 ---
