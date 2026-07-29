@@ -1,12 +1,11 @@
 const fs = require("fs");
 const path = require("path");
 
-console.log("=== Старт диагностики сборки ===");
-console.log("Текущая папка:", process.cwd());
+console.log("=== Старт сборки README.md ===");
 
 const indexPath = path.resolve(process.cwd(), "docs/index.md");
 if (!fs.existsSync(indexPath)) {
-  console.error("[ERROR] Файл docs/index.md не найден по пути:", indexPath);
+  console.error("[ERROR] Файл docs/index.md не найден!");
   process.exit(1);
 }
 
@@ -16,31 +15,23 @@ const lines = rawIndex.replace(/\r\n/g, "\n").split("\n");
 let outputLines = [];
 
 for (let line of lines) {
-  // Выведем каждую строку для отладки
-  if (line.includes("include")) {
-    console.log("Нашли строку с include:", JSON.stringify(line));
-  }
-
-  // Очищаем пробелы
   const cleanLine = line.replace(/[\u00A0\u1680\u180E\u2000-\u200B\u202F\u205F\u3000\uFEFF]/g, " ");
   
-  // Максимально лояльная регулярка: ищет include, двоеточие и любой путь до конца коммента
-  const match = cleanLine.match(/include\s*:\s*([^>]+)/i);
+  // Идем строго по шаблону: ловим путь между include: и дефисами закрытия комментария -->
+  const match = cleanLine.match(/include\s*:\s*([^>\s]+)/i);
 
   if (match) {
-    // Вытаскиваем всё, что после двоеточия, и чистим от кавычек, пробелов и стрелочек -->
-    let includePath = match[1].replace(/["'’`]/g, "").replace(/-->/g, "").trim();
+    let includePath = match[1].replace(/["'’`]/g, "").trim();
     includePath = includePath.replace(/\\/g, "/");
     
     const fullPath = path.resolve(process.cwd(), includePath);
-    console.log(`-> Пытаемся подключить: "${includePath}" (Полный путь: ${fullPath})`);
 
     if (fs.existsSync(fullPath)) {
-      console.log(`[OK] Успешно найдено!`);
+      console.log(`[OK] Подставили файл: ${includePath}`);
       const includedContent = fs.readFileSync(fullPath, "utf8").replace(/\r\n/g, "\n");
       outputLines.push(includedContent);
     } else {
-      console.warn(`[WARN] Файл НЕ НАЙДЕН физически на диске!`);
+      console.warn(`[WARN] Файл не найден: ${includePath} (путь: ${fullPath})`);
       outputLines.push(`<!-- [ERROR: File not found: ${includePath}] -->`);
     }
   } else {
@@ -58,4 +49,4 @@ https://github.com/OctoHare/VDS-Blueprint
 const finalContent = noticeBanner + compiledBody;
 
 fs.writeFileSync("README.md", finalContent, "utf8");
-console.log("=== Сборка завершена ===");
+console.log("=== README.md успешно собран со всеми вставками! ===");
