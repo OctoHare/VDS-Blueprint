@@ -2,7 +2,7 @@
 
 ![Phoenix Project](https://github.com/OctoHare/VDS-Blueprint/blob/main/imgs/phoenix.webp?raw=true)
 
-<br><br>
+<br>
 
 ## 📐 Подготовительная часть
 
