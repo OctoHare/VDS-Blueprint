@@ -6,7 +6,7 @@ https://github.com/OctoHare/VDS-Blueprint
 ![Phoenix Project](https://github.com/OctoHare/VDS-Blueprint/blob/main/imgs/phoenix.webp?raw=true)
 
 # Phoenix - до последнего вздоха и снова!
-
+<!-- test --->
 ---
 
 ## 📐 Подготовительная часть
