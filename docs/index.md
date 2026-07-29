@@ -59,14 +59,14 @@
 <details>
 <summary><b>🧾 Списки бесплатных VPN серверов</b></summary>
 
-<!-- Free-VPN.md -->
+<!-- include: docs/Free-VPN.md -->
 
 </details>
 
 <details>
 <summary><b>🧾 Списки платных VPN сервисов</b></summary>
 
-<!-- VPN-List.md -->
+<!-- include: docs/VPN-List.md -->
 
 </details>
 
@@ -94,6 +94,6 @@
 <details>
 <summary><b>🚧 Интересные проекты (не тестировались)</b></summary>
 
-<!-- include: Not-Tested.md -->
+<!-- include: docs/Not-Tested.md -->
 
 </details>
