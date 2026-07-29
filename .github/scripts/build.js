@@ -1,43 +1,54 @@
 const fs = require("fs");
 const path = require("path");
 
-console.log("=== Старт сборки README.md ===");
+console.log("=== Старт сборки README.md (построчно) ===");
 
-// 1. Читаем исходный index.md целиком
-let content = fs.readFileSync("docs/index.md", "utf8").replace(/\r\n/g, "\n");
+if (!fs.existsSync("docs/index.md")) {
+  console.error("[ERROR] Файл docs/index.md не найден!");
+  process.exit(1);
+}
 
-// 2. Всеядный поиск: ищет любой комментарий со словом include и достает оттуда путь
-const commentRegex = /<!--[\s\S]*?include[\s\S]*?-->/gi;
+const rawIndex = fs.readFileSync("docs/index.md", "utf8");
+const lines = rawIndex.replace(/\r\n/g, "\n").split("\n");
 
-content = content.replace(commentRegex, (fullComment) => {
-  // Достаем путь из комментария (игнорируем лишние пробелы и кавычки)
-  const pathMatch = fullComment.match(/include\s*:?\s*["'’`]?([^\s"':’`>]+)/i);
+let outputLines = [];
 
-  if (!pathMatch || !pathMatch[1]) {
-    return fullComment; // Если это не наш инклюд (например, шапка), оставляем как есть
-  }
+for (let line of lines) {
+  // Убираем лишние пробелы для проверки
+  const trimmed = line.trim();
+  
+  // Ищем строку вида <!-- include: путь/к/файлу.md -->
+  // Поддерживаем разные варианты написания с пробелами
+  const match = trimmed.match(/^<!--\s*include:\s*([^\s-->]+)\s*-->$/i);
 
-  const rawPath = pathMatch[1];
-  const includePath = rawPath.replace(/\\/g, "/");
-  const fullPath = path.resolve(process.cwd(), includePath);
+  if (match) {
+    const includePath = match[1].replace(/\\/g, "/");
+    const fullPath = path.resolve(process.cwd(), includePath);
 
-  if (fs.existsSync(fullPath)) {
-    console.log(`[OK] Подставили файл: ${includePath}`);
-    return fs.readFileSync(fullPath, "utf8").replace(/\r\n/g, "\n");
+    if (fs.existsSync(fullPath)) {
+      console.log(`[OK] Подставили файл: ${includePath}`);
+      const includedContent = fs.readFileSync(fullPath, "utf8").replace(/\r\n/g, "\n");
+      outputLines.push(includedContent);
+    } else {
+      console.warn(`[WARN] Файл не найден: ${includePath}`);
+      outputLines.push(`<!-- [ERROR: File not found: ${includePath}] -->`);
+    }
   } else {
-    console.warn(`[WARN] Файл не найден: ${includePath}`);
-    return `<!-- [ERROR: File not found: ${includePath}] -->`;
+    // Обычная строка из index.md — оставляем как есть
+    outputLines.push(line);
   }
-});
+}
 
-// 3. Формируем нашу плашку для репозитория
+// Собираем всё тело документа обратно
+const compiledBody = outputLines.join("\n");
+
+// Добавляем плашку наверх
 const noticeBanner = `<!-- 
 Данный документ из репозитория
 https://github.com/OctoHare/VDS-Blueprint
 -->\n\n`;
 
-// 4. Склеиваем плашку и обработанный текст
-const finalContent = noticeBanner + content;
+const finalContent = noticeBanner + compiledBody;
 
 fs.writeFileSync("README.md", finalContent, "utf8");
-console.log("=== README.md успешно собран со вставками! ===");
+console.log("=== README.md успешно собран построчно! ===");
