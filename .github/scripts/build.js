@@ -12,16 +12,15 @@ function processIncludes(filePath) {
   // Очистка переносов строк
   content = content.replace(/\r\n/g, "\n");
 
-  // 1. Находим ЛЮБОЙ комментарий, где есть слово include
+  // Находим и заменяем инклюды
   const commentRegex = /<!--[\s\S]*?include[\s\S]*?-->/gi;
 
   let matchCount = 0;
   content = content.replace(commentRegex, (fullComment) => {
-    // 2. Достаем из этого комментария сам путь (все символы кроме пробелов, кавычек и стрелок)
     const pathMatch = fullComment.match(/include\s*:?\s*["'’`]?([^\s"':’`>]+)/i);
 
     if (!pathMatch || !pathMatch[1]) {
-      return fullComment; // Если это был не наш инклюд, оставляем как есть
+      return fullComment;
     }
 
     matchCount++;
@@ -46,6 +45,18 @@ function processIncludes(filePath) {
 }
 
 console.log("=== Старт сборки README.md ===");
-const compiledContent = processIncludes("docs/index.md");
-fs.writeFileSync("README.md", compiledContent, "utf8");
-console.log("=== README.md успешно обновлен ===");
+
+// 1. Собираем весь текст из index.md (вместе с тем, что было до первого инклюда)
+const compiledBody = processIncludes("docs/index.md");
+
+// 2. Формируем плашку для верхней части README.md
+const noticeBanner = `<!-- 
+Данный документ из репозитория
+https://github.com/OctoHare/VDS-Blueprint
+-->\n\n`;
+
+// 3. Объединяем плашку и тело документа
+const finalContent = noticeBanner + compiledBody;
+
+fs.writeFileSync("README.md", finalContent, "utf8");
+console.log("=== README.md успешно обновлен с плашкой ===");
