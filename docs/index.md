@@ -81,6 +81,13 @@
 </details>
 
 <details>
+<summary><b>🔗 Полезные ссылки</b></summary>
+
+<!-- include: docs/Links.md -->
+
+</details>
+
+<details>
 <summary><b>🚧 Интересные проекты (не тестировались)</b></summary>
 
 <!-- include: docs/Not-Tested.md -->
