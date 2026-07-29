@@ -1216,6 +1216,8 @@ fail2ban-client status
 
 Amnezia VPN
 
+---
+
 
 </details>
 
@@ -1291,6 +1293,8 @@ Outline
 
 TrustTunnel
 
+---
+
 
 </details>
 
@@ -1312,6 +1316,8 @@ AmneziaWG
 TrustTunnel
 
 MTProto
+
+---
 
 
 </details>
