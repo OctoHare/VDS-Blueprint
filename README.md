@@ -12,13 +12,13 @@ https://github.com/OctoHare/VDS-Blueprint
 
 ---
 
-<!-- include: docs/Project-Phoenix.md -->
+<!-- [ERROR: File not found: docs/Project-Phoenix.md --] -->
 
 ---
 
 # 🔒 Безопасность SSH и защита сервера
 
-<!-- include: docs/SSH-Security.md -->
+<!-- [ERROR: File not found: docs/SSH-Security.md --] -->
 
 ---
 
@@ -27,13 +27,13 @@ https://github.com/OctoHare/VDS-Blueprint
 <details>
 <summary><b>📱 Клиенты VPN (Настройка и подключение)</b></summary>
 
-<!-- include: docs/VPN-Clients.md -->
+<!-- [ERROR: File not found: docs/VPN-Clients.md --] -->
 
 </details>
 
 <details>
 <summary><b>⚡ Оптимизация и быстрая сборка (Fast Builds)</b></summary>
 
-<!-- include: docs/Fast-Builds.md -->
+<!-- [ERROR: File not found: docs/Fast-Builds.md --] -->
 
 </details>
