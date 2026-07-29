@@ -1158,9 +1158,34 @@ fail2ban-client status
 ## Дополнительные материалы
 
 <details>
-<summary><b>🚧 Интересные проекты (не тестировались)</b></summary>
+<summary><b>🧾 Списки бесплатных VPN серверов</b></summary>
 
-<!-- [ERROR: File not found: Not-Tested.md] -->
+<!-- Free-VPN.md -->
+
+</details>
+
+<details>
+<summary><b>🧾 Списки платных VPN сервисов</b></summary>
+
+<!-- VPN-List.md -->
+
+</details>
+
+<details>
+<summary><b>⚡ Варианты быстрого старта (свой VPN за 5 минут)</b></summary>
+
+## 🏃 Быстрые решения 🚑
+
+<details>
+<summary>⚡ XRay VPN-сервер через консоль</summary>
+<br>
+
+> Настрока любого XRay VPN-сервер в 4 клика, получаем сразу готовые профили для подключение. Скрипт и гайд от владельца VPN сервиса.
+
+GitHub [RustForNew/XRay-Server-Wizard](https://github.com/RustForNew/xray-server-wizard) | YouTube [информация + гайд](https://www.youtube.com/watch?v=YQpa_0-6xC0)
+
+</details>
+
 
 </details>
 
@@ -1220,19 +1245,30 @@ TrustTunnel
 </details>
 
 <details>
-<summary><b>⚡ Оптимизация и быстрая сборка (Fast Builds)</b></summary>
+<summary><b>📝 Описание и истории актуальных VPN протоколов</b></summary>
 
-## 🏃 Быстрые решения 🚑
+# Описание и истории актуальных VPN протоколов
 
-<details>
-<summary>⚡ XRay VPN-сервер через консоль</summary>
-<br>
+VLESS
 
-> Настрока любого XRay VPN-сервер в 4 клика, получаем сразу готовые профили для подключение. Скрипт и гайд от владельца VPN сервиса.
+Hysteria2
 
-GitHub [RustForNew/XRay-Server-Wizard](https://github.com/RustForNew/xray-server-wizard) | YouTube [информация + гайд](https://www.youtube.com/watch?v=YQpa_0-6xC0)
+OpenVPN
+
+WireGuard
+
+AmneziaWG
+
+TrustTunnel
+
+MTProto
+
 
 </details>
 
+<details>
+<summary><b>🚧 Интересные проекты (не тестировались)</b></summary>
+
+<!-- [ERROR: File not found: Not-Tested.md] -->
 
 </details>
