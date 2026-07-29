@@ -22,9 +22,23 @@
 ## Дополнительные материалы
 
 <details>
-<summary><b>🚧 Интересные проекты (не тестировались)</b></summary>
+<summary><b>🧾 Списки бесплатных VPN серверов</b></summary>
 
-<!-- include: Not-Tested.md -->
+<!-- Free-VPN.md -->
+
+</details>
+
+<details>
+<summary><b>🧾 Списки платных VPN сервисов</b></summary>
+
+<!-- VPN-List.md -->
+
+</details>
+
+<details>
+<summary><b>⚡ Варианты быстрого старта (свой VPN за 5 минут)</b></summary>
+
+<!-- include: docs/Fast-Builds.md -->
 
 </details>
 
@@ -36,8 +50,15 @@
 </details>
 
 <details>
-<summary><b>⚡ Оптимизация и быстрая сборка (Fast Builds)</b></summary>
+<summary><b>📝 Описание и истории актуальных VPN протоколов</b></summary>
 
-<!-- include: docs/Fast-Builds.md -->
+<!-- include: docs/VPN-Protocols.md -->
+
+</details>
+
+<details>
+<summary><b>🚧 Интересные проекты (не тестировались)</b></summary>
+
+<!-- include: Not-Tested.md -->
 
 </details>
