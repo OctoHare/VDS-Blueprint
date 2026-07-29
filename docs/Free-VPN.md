@@ -6,3 +6,5 @@
 - 🔄 GitHub [Zieng2/WL](https://github.com/zieng2/wl) — Раз в час обновляемый огромный список VLESS-серверов.
 - 🤖 GitHub [whoahaow/rjsxrd](https://github.com/whoahaow/rjsxrd) — Автоматически обновляемые VPN-конфиги.
 - 🛡️ GitHub [Igareck/VPN-Configs-for-Russia](https://github.com/igareck/vpn-configs-for-russia) — Бесплатные VPN-конфигурации, работающие в РФ.
+
+---
