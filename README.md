@@ -1195,14 +1195,25 @@ fail2ban-client status
 <details>
 <summary><b>🧾 Списки бесплатных VPN серверов</b></summary>
 
-<!-- Free-VPN.md -->
+# ℹ️ О бесплатных решениях
+
+Эти конфиги — результат работы энтузиастов, за что им огромное спасибо. Однако помните: бесплатные VPN — это всегда история «на свой страх и риск». Используйте их как временную «запаску» на экстренный случай, когда нужно срочно выйти в сеть. Для постоянной работы они подходят слабо: публичные ключи быстро уходят в бан, а инфраструктура держится на альтруизме, а не на гарантиях.
+
+🆓 Бесплатные VPN-сервера
+- 🔄 GitHub [Zieng2/WL](https://github.com/zieng2/wl) — Раз в час обновляемый огромный список VLESS-серверов.
+- 🤖 GitHub [whoahaow/rjsxrd](https://github.com/whoahaow/rjsxrd) — Автоматически обновляемые VPN-конфиги.
+- 🛡️ GitHub [Igareck/VPN-Configs-for-Russia](https://github.com/igareck/vpn-configs-for-russia) — Бесплатные VPN-конфигурации, работающие в РФ.
+
 
 </details>
 
 <details>
 <summary><b>🧾 Списки платных VPN сервисов</b></summary>
 
-<!-- VPN-List.md -->
+# 🧾Списки платных VPN сервисов
+
+Amnezia VPN
+
 
 </details>
 
@@ -1304,6 +1315,40 @@ MTProto
 <details>
 <summary><b>🚧 Интересные проекты (не тестировались)</b></summary>
 
-<!-- [ERROR: File not found: Not-Tested.md] -->
+## 🚧 Интересные проекты (не тестировались) ⚠️
+
+<details>
+<summary>📃 White List (olcRTC TCP-over-WebRTC)</summary>
+<br>
+  
+GitHub [OpenLibreCommunity/olcRTC](https://github.com/openlibrecommunity/olcrtc) | 4PDA (через VPN) [пост-инструкция](https://4pda.to/forum/index.php?showtopic=1110469&st=5960#entry143330149) | YouTube [ролик про olcRTC](https://www.youtube.com/watch?v=9FmyzDnwQ5E)
+</details>
+<details>
+<summary>📃 White List (vk-turn-proxy)</summary>
+<br>
+  
+GitHub [cacggghp/vk-turn-proxy](https://github.com/cacggghp/vk-turn-proxy)
+</details>
+<details>
+<summary>⚙️ Caddy WEB UI (веб интерфейс)</summary>
+<br>
+  
+GitHub [ZackWag/Caddy-UI](https://github.com/zackwag/caddy-ui)
+</details>
+<details>
+<summary>⚙️ 3DP-Manager (веб интерфейс)</summary>
+  
+> Утилита для автогенерации инбаундов к панели 3X-UI, формирования единых подписок, управления несколькими 3X-UI нодами и настройки relay-перенаправления трафика с промежуточных серверов на основные.
+  
+GitHub [DenPiligrim/3DP-Manager](https://github.com/denpiligrim/3dp-manager)
+</details>
+<details>
+<summary>⚙️ Туннель на базе RSTUN между серверами</summary>
+  
+> Скрипт для создания туннеля на базе [rstun](https://github.com/search?q=rstun&type=repositories) между сервера, подойдёт для организации каскада. В ролике показан пример с панелью 3X-UI.
+  
+GitHub [Erfan-XRay/TrustTunnel](https://github.com/Erfan-XRay/TrustTunnel) (не путать с протоколом [TrustTunnel](https://github.com/TrustTunnel/TrustTunnel)) | YouTube [ролик-инструкция](https://www.youtube.com/watch?v=QD2xXu9DuSw)
+</details>
+
 
 </details>
