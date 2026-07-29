@@ -1204,6 +1204,8 @@ fail2ban-client status
 - 🤖 GitHub [whoahaow/rjsxrd](https://github.com/whoahaow/rjsxrd) — Автоматически обновляемые VPN-конфиги.
 - 🛡️ GitHub [Igareck/VPN-Configs-for-Russia](https://github.com/igareck/vpn-configs-for-russia) — Бесплатные VPN-конфигурации, работающие в РФ.
 
+---
+
 
 </details>
 
@@ -1231,6 +1233,8 @@ Amnezia VPN
 GitHub [RustForNew/XRay-Server-Wizard](https://github.com/RustForNew/xray-server-wizard) | YouTube [информация + гайд](https://www.youtube.com/watch?v=YQpa_0-6xC0)
 
 </details>
+
+---
 
 
 </details>
@@ -1349,6 +1353,8 @@ GitHub [DenPiligrim/3DP-Manager](https://github.com/denpiligrim/3dp-manager)
   
 GitHub [Erfan-XRay/TrustTunnel](https://github.com/Erfan-XRay/TrustTunnel) (не путать с протоколом [TrustTunnel](https://github.com/TrustTunnel/TrustTunnel)) | YouTube [ролик-инструкция](https://www.youtube.com/watch?v=QD2xXu9DuSw)
 </details>
+
+---
 
 
 </details>
