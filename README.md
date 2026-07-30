@@ -1303,6 +1303,11 @@ https://github.com/OctoHare/VDS-Blueprint
 <details>
 <summary><b>🧾 Списки платных VPN сервисов</b></summary>
 
+<!-- 
+Данный документ из репозитория
+https://github.com/OctoHare/VDS-Blueprint
+-->
+
 # 🧾Списки платных VPN сервисов
 
 Amnezia VPN
