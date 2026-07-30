@@ -9,7 +9,7 @@
 - [Fixs and Tricks](https://www.youtube.com/@fixsandtricks2) - канал с полезной информацие и инструкциями по настройке в основном клиентов
 - [Доступ к интернету](https://www.youtube.com/@dostup_k_internety) - много полезных видео, немного нудно слушать (хорошая ИИ озвучка)
 - [EasyNetwork](https://www.youtube.com/@EasyNetworkYT) - хорошие полезные ролики
-- [Евгеньевич](https://www.youtube.com/@eevgenyevichh) - канал с полезной информацие и инструкциями по настройке панели Remnawave
+- [Евгеньевич](https://www.youtube.com/@eevgenyevichh) - канал с полезной информацией и инструкциями по настройке панели Remnawave
 - [Антон PRO IT](https://www.youtube.com/@antonproit) - канал с небольшим количеством роликов по настройке VPN на роутере
 - [ЗА 5 МИНУТ](https://www.youtube.com/@Za5Minyt) - простенько и нудненько, но пригодится
 - [F5](https://www.youtube.com/@F5GO) - несколько видео по теме настройки роутеров
@@ -19,6 +19,9 @@
 - [LinkOfFreedom](https://www.youtube.com/@LinkOfFreedom) - немного видео по теме
 - [Анатолий | Программирую Бизнес](https://www.youtube.com/@teqit_lab) - немного видео по теме
 - [Технарь обходит!](https://www.youtube.com/@tehnar_obxodit) - ролики по теме
+- [Недопустимая операция](https://www.youtube.com/@xGetLastError) - ролики по теме
+- [Профессор Ботов](https://www.youtube.com/@professor_bot) - ролики о теме
+- [Rrezzak09VPN](https://www.youtube.com/@Rrezzak09VPN) - ролики по настройке панели Remnawave
 
 ### :octocat: Работа с GitHub:
 - [Синтаксис markdown на GitHub](https://docs.github.com/ru/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
