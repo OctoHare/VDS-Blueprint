@@ -1410,6 +1410,11 @@ MTProto
 - [ЗА 5 МИНУТ](https://www.youtube.com/@Za5Minyt) - простенько и нудненько, но пригодится
 - [F5](https://www.youtube.com/@F5GO) - несколько видео по теме настройки роутеров
 - [h1guro](https://www.youtube.com/@predmethvh) - канал судя по всему хотера h1cloud, у хостера уже есть правильные скрипты
+- [Secure Nodes](https://www.youtube.com/@SecureNodes) - немного видео
+- [imp](https://www.youtube.com/@imp_IO) - в основном про роутеры
+- [LinkOfFreedom](https://www.youtube.com/@LinkOfFreedom) - немного видео по теме
+- [Анатолий | Программирую Бизнес](https://www.youtube.com/@teqit_lab) - немного видео по теме
+- [Технарь обходит!](https://www.youtube.com/@tehnar_obxodit) - ролики по теме
 
 ### :octocat: Работа с GitHub:
 - [Синтаксис markdown на GitHub](https://docs.github.com/ru/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
