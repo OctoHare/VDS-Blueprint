@@ -1302,6 +1302,11 @@ Amnezia VPN
 <details>
 <summary><b>⚡ Варианты быстрого старта (свой VPN за 5 минут)</b></summary>
 
+<!-- 
+Данный документ из репозитория
+https://github.com/OctoHare/VDS-Blueprint
+-->
+
 ## 🏃 Быстрые решения 🚑
 
 <details>
