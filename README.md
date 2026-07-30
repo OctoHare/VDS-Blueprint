@@ -1455,6 +1455,11 @@ https://github.com/OctoHare/VDS-Blueprint
 <details>
 <summary><b>🚧 Интересные проекты (не тестировались)</b></summary>
 
+<!-- 
+Данный документ из репозитория
+https://github.com/OctoHare/VDS-Blueprint
+-->
+
 ## 🚧 Интересные проекты (не тестировались) ⚠️
 
 <details>
