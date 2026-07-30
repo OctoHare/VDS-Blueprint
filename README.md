@@ -1413,6 +1413,11 @@ MTProto
 <details>
 <summary><b>🔗 Полезные ссылки</b></summary>
 
+<!-- 
+Данный документ из репозитория
+https://github.com/OctoHare/VDS-Blueprint
+-->
+
 ## 🔗 Полезные ссылки
 
 ### 📺 Каналы на YouTube по теме репозитория:
