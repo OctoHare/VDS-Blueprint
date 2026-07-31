@@ -31,8 +31,8 @@ https://github.com/OctoHare/VDS-Blueprint
 
 <details>
 <summary><b>☕ Поддержать проект</b></summary>
-
-Если этот проект сэкономил вам время или помог настроить сервер, вы можете поддержать автора:
+<br>
+Если этот проект сэкономил вам время или помог настроить сервер, вы можете поддержать автора:<br><br>
 
 * Tribute: [web.tribute.tg/d/M3D](https://web.tribute.tg/d/M3D)
 
