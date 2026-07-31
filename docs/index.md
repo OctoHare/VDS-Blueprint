@@ -16,6 +16,15 @@
 </details>
 
 <details>
+<summary>📝 <b>Руководство по участию в проекте «Феникс»</b></summary>
+<br>
+Любой вклад — от исправления опечатки до добавления новых проверенных скриптов — очень ценится.
+
+Побробнее по ссылке: [Contributing](https://github.com/OctoHare/VDS-Blueprint/blob/main/Contributing.md)
+
+</details>
+
+<details>
 <summary>⚠️ <b>Ограничение ответственности и предупреждение о рисках (Disclaimer)</b></summary>
 
 <!-- include: docs/Disclaimer.md -->
