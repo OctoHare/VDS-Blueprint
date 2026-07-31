@@ -16,12 +16,22 @@
 </details>
 
 <details>
-<summary>📝 <b>Руководство по участию в проекте «Феникс»</b></summary>
+<summary>📝 <b>Вклад и участие в проекте «Феникс»</b></summary>
 <br>
 Любой вклад — от исправления опечатки до добавления новых проверенных скриптов — очень ценится.
 
 Побробнее по ссылке: [Contributing](https://github.com/OctoHare/VDS-Blueprint/blob/main/Contributing.md)
 
+</details>
+
+<details>
+<summary><b>☕ Поддержать проект</b></summary>
+
+Если этот проект сэкономил вам время или помог настроить сервер, вы можете поддержать автора:
+
+* Tribute: [web.tribute.tg/d/M3D](https://web.tribute.tg/d/M3D)
+
+Все средства идут на оплату тестовых VDS-серверов и кофе. Спасибо!
 </details>
 
 <details>
