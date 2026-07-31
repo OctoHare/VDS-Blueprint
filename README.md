@@ -945,7 +945,7 @@ docker exec 3x-ui ls -la /app/certs
 <details>
 <summary>MTProto прокси для Telegram</summary>
 
-#### Устанавливаем в контейнер прокси
+**Устанавливаем в контейнер прокси**
 
 [Версия от 9seconds/mtg](https://github.com/9seconds/mtg)
 
