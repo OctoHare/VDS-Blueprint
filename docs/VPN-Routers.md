@@ -3,4 +3,6 @@
 https://github.com/OctoHare/VDS-Blueprint
 -->
 
+🚧Раздел в разработке🚧
+
 ## 🛜 Настройка на роутерах
