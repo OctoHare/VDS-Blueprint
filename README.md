@@ -1465,6 +1465,8 @@ https://github.com/OctoHare/VDS-Blueprint
 https://github.com/OctoHare/VDS-Blueprint
 -->
 
+🚧Раздел в разработке🚧
+
 # 🧾Списки платных VPN сервисов
 
 Amnezia VPN
@@ -1603,6 +1605,8 @@ TrustTunnel
 https://github.com/OctoHare/VDS-Blueprint
 -->
 
+🚧Раздел в разработке🚧
+
 ## 🛜 Настройка на роутерах
 
 
@@ -1615,6 +1619,8 @@ https://github.com/OctoHare/VDS-Blueprint
 Данный документ из репозитория
 https://github.com/OctoHare/VDS-Blueprint
 -->
+
+🚧Раздел в разработке🚧
 
 # Описание и истории актуальных VPN протоколов
 
