@@ -1672,6 +1672,8 @@ https://github.com/OctoHare/VDS-Blueprint
 - [Синтаксис markdown на GitHub](https://docs.github.com/ru/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
 - [Список доступных эмодзи на GitHub и их коды](https://github.com/ikatyang/emoji-cheat-sheet/tree/github-actions-auto-update)
 
+
+🚧Секция дополняется🚧
 ---
 
 
@@ -1720,6 +1722,8 @@ GitHub [DenPiligrim/3DP-Manager](https://github.com/denpiligrim/3dp-manager)
 GitHub [Erfan-XRay/TrustTunnel](https://github.com/Erfan-XRay/TrustTunnel) (не путать с протоколом [TrustTunnel](https://github.com/TrustTunnel/TrustTunnel)) | YouTube [ролик-инструкция](https://www.youtube.com/watch?v=QD2xXu9DuSw)
 </details>
 
+
+🚧Секция дополняется🚧
 ---
 
 
