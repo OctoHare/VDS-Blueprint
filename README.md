@@ -955,18 +955,26 @@ docker exec 3x-ui ls -la /app/certs
 
 <details>
 <summary>📟 Панель 3X-UI настройка протокола VLESS -> WARP</summary>
+
+  * 🚧В процессе написания🚧
 </details>
 
 <details>
 <summary>📟 Панель 3X-UI настройка протокол Hysteria2 -> WARP</summary>
+  
+  * 🚧В процессе написания🚧
 </details>
 
 <details>
 <summary>🅰️ Протокол AmneziaWG 2.0 -> tun2socks -> 3X-UI -> WARP</summary>
+  
+  * 🚧В процессе написания🚧
 </details>
 
 <details>
 <summary>➡️ Протокол TrustTunnel -> 3X-UI -> WARP</summary>
+  
+  * 🚧В процессе написания🚧
 </details>
 
 <br>
