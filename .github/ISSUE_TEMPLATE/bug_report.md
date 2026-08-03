@@ -1,13 +1,4 @@
 ---
-name: Bug report
-about: Create a report to help us improve
-title: ''
-labels: ''
-assignees: ''
-
----
-
----
 name: 🐛 Багрепорт (Bug Report)
 about: Сообщить об ошибке или некорректной работе
 title: '[BUG] '
