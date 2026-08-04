@@ -1571,8 +1571,27 @@ GitHub [RustForNew/XRay-Server-Wizard](https://github.com/RustForNew/xray-server
 
 </details>
 
+<details>
+<summary>📟 Панель управления протоколами (платная)</summary>
+<br>
 
-  * 🚧Секция дополняется🚧
+> За ежемесячную плату *(100 руб. 1 сервер | 300 руб. 3 сервера | 800 руб. 10 серверов)* данная панель установить на ваш сервер один из поддерживаемых протоколов. На момент публикации там были Hysteria2, TrustTunnel, MTProto, VLESS+Reality. Через неё же вы будете добавлять пользователей. 
+
+Панель: [Pro-Panel.PanelServrpkDomain.xyz](https://pro-panel.panelservrpkdomain.xyz)
+
+Хозяева панельки, судя по всему, RIXXX -  [YouTube](https://www.youtube.com/@rixxx-prime) | [Telegram](https://t.me/russian_paradice_vpn) | [GitHub](https://github.com/cwash797-cmd)
+
+- арендуем сервер в любой нужной вам стране (1 ядро, 2 Гб оперативной памяти, ОС — Ubuntu 24)
+- регистрируемся в панели, получаем пробный период на 3 дня
+- отдаём данные для подключения к своему VDS
+- выбираем протокол и ждём
+- получаем ключ для подключения
+
+</details>
+
+<br>
+🚧Секция дополняется🚧
+
 ---
 
 
