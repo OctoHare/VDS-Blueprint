@@ -688,10 +688,10 @@ ls -la /var/www/html/
 3. Задаём имя - **Name:** `caddy`
 4. В поле **Web editor** вставляем:
 
-```bash
+```yml
 services:
   caddy:
-    image: caddy:latest
+    image: ghcr.io/octohare/caddy:latest
     container_name: caddy
     restart: unless-stopped
 
@@ -714,6 +714,8 @@ volumes:
   caddy_config:
 ```
 5. Кнопка "**Deploy the stack**" внизу слева
+
+> ℹ️ Используется кастомный образ Caddy собранный на базе официального `caddy:latest` с добавлением модуля **[`caddyserver/replace-response`](https://github.com/caddyserver/replace-response)**. Модуль `replace-response` добавляет в Caddyfile поддержку директивы `replace`, которая позволяет подменять текст (HTML/JS/CSS/JSON) в теле ответов бэкенда на лету. Это необходимо для корректного проксирования сервисов по **subpath** (например, `domain.com/subpath/`), когда проксируемый сервис завязан на абсолютные пути (`/static/`, `/api/`) и не умеет работать с базовыми префиксами из коробки.
 
 Проверяем, что по адресам:
 - `https://megaserver.com` - открывается HTML-заглушка
