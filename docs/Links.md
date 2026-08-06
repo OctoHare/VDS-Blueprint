@@ -5,7 +5,7 @@ https://github.com/OctoHare/VDS-Blueprint
 
 ## 🔗 Полезные ссылки
 
-### 📺 Каналы на YouTube по теме репозитория:
+**📺 Каналы на YouTube по теме репозитория:**
 - [Давайте про IT](https://www.youtube.com/@davaite_pro_it) - канал WEB программиста Богдана на котором много роликов о VPN и его настройке
 - [NetCraft](https://www.youtube.com/@CraftNetX) - канал с роликами про настройку VPN на серверах и роутерах
 - [RIXXX](https://www.youtube.com/@rixxx-prime) - канал с роликами про различные протоколы и способы их настройки
@@ -28,10 +28,13 @@ https://github.com/OctoHare/VDS-Blueprint
 - [Профессор Ботов](https://www.youtube.com/@professor_bot) - ролики о теме
 - [Rrezzak09VPN](https://www.youtube.com/@Rrezzak09VPN) - ролики по настройке панели Remnawave
 
-### :octocat: Работа с GitHub:
+**:octocat: Работа с GitHub:**
 - [Синтаксис markdown на GitHub](https://docs.github.com/ru/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
 - [Список доступных эмодзи на GitHub и их коды](https://github.com/ikatyang/emoji-cheat-sheet/tree/github-actions-auto-update)
+- [Оформление публичного репозитория](https://docs.github.com/ru/communities/setting-up-your-project-for-healthy-contributions/about-community-profiles-for-public-repositories)
 
+**ℹ️ Справочная информация:**
+- [Список временных зон](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
 
 🚧Секция дополняется🚧
 ---
