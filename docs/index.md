@@ -52,8 +52,6 @@
 
 ---
 
-<!-- include: docs/Project-Phoenix.md -->
-
 <!-- include: docs/00-Phoenix.md -->
 
 <!-- include: docs/01-Prepare.md -->
