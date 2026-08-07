@@ -887,8 +887,6 @@ docker logs portainer --tail 10
 <br>
 
 
----
-
 ## 📐 Подготовительная часть
 
 <details>
@@ -1061,8 +1059,6 @@ docker logs portainer --tail 10
 
 ---
 
-
----
 
 ## 🏰 Установка инструментов (Панель 3X-UI как ядро)
 
@@ -1255,8 +1251,6 @@ docker run --rm nineseconds/mtg:2 doctor /config/config.toml
 
 <br>
 
-
----
 
 <!-- 
 Данный документ из репозитория
