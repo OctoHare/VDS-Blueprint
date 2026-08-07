@@ -1,4 +1,11 @@
-*(English version below)*
+---
+<div align="center">
+
+[**🇬🇧 ⬇️ English version below ⬇️** 🇬🇧](#contributing-guidelines)
+
+</div>
+
+---
 
 # Руководство по участию в проекте «Феникс»
 
