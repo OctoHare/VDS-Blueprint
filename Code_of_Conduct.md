@@ -1,4 +1,11 @@
-*(English version below)*
+---
+<div align="center">
+
+[**🇬🇧 ⬇️ English version below ⬇️** 🇬🇧](#code-of-conduct)
+
+</div>
+
+---
 
 # Кодекс поведения
 
