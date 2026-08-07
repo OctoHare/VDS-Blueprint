@@ -55,6 +55,8 @@
 
 <!-- include: docs/01-Prepare.md -->
 
+<!-- include: docs/02-Setup.md -->
+
 <!-- include: docs/Core-3X-UI.md -->
 
 <!-- include: docs/SSH-Security.md -->
