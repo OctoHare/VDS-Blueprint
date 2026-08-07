@@ -1,4 +1,11 @@
-*(English version below)*
+---
+<div align="center">
+
+[**🇬🇧 ⬇️ English version below ⬇️** 🇬🇧](#security-policy)
+
+</div>
+
+---
 
 # Политика безопасности
 
