@@ -1,3 +1,8 @@
+<!-- 
+Данный документ из репозитория
+https://github.com/OctoHare/VDS-Blueprint
+-->
+
 ## 📋 Оснащение сервера (Docker, Portainer, Caddy)
 
 <details>
