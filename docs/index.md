@@ -57,6 +57,8 @@
 
 <!-- include: docs/02-Setup.md -->
 
+<!-- include: docs/03-Services.md -->
+
 <!-- include: docs/Core-3X-UI.md -->
 
 <!-- include: docs/SSH-Security.md -->
