@@ -53,15 +53,9 @@
 
 <!-- include: docs/Project-Phoenix.md -->
 
----
-
 <!-- include: docs/01-Prepare.md -->
 
----
-
 <!-- include: docs/Core-3X-UI.md -->
-
----
 
 <!-- include: docs/SSH-Security.md -->
 
