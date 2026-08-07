@@ -887,6 +887,11 @@ docker logs portainer --tail 10
 <br>
 
 
+<!-- 
+Данный документ из репозитория
+https://github.com/OctoHare/VDS-Blueprint
+-->
+
 ## 📐 Подготовительная часть
 
 <details>
@@ -1061,6 +1066,11 @@ docker logs portainer --tail 10
 
 ---
 
+
+<!-- 
+Данный документ из репозитория
+https://github.com/OctoHare/VDS-Blueprint
+-->
 
 ## 🔑 Настройка сервера
 
