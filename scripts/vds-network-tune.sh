@@ -13,7 +13,6 @@ YELLOW='\033[1;33m'
 CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
-clear
 echo -e "${CYAN}==============================================================${NC}"
 echo -e "${CYAN}          VDS Network Tune — оптимизация сетевого стека${NC}"
 echo -e "${CYAN}==============================================================${NC}"
@@ -28,11 +27,12 @@ echo "  • Включают TCP Fast Open"
 echo "  • Увеличивают очереди соединений и backlog"
 echo "  • Значительно повышают лимит открытых файлов (nofile)"
 echo "  • Ускоряют обнаружение мёртвых соединений (keepalive)"
-echo "  • Оптимизируют буферы и переиспользование портов"
+echo "  • Оптимизируют сетевые буферы и повторное использование портов"
 echo
 echo -e "${YELLOW}Применить настройки? [Y/n]:${NC} "
 
-read -r answer
+# Читаем именно с терминала (важно при запуске через curl | bash)
+read -r answer < /dev/tty
 answer=${answer:-Y}
 
 if [[ ! "$answer" =~ ^[Yy]$ ]]; then
@@ -134,7 +134,7 @@ echo "рекомендуется перезагрузить сервер."
 echo
 echo -e "${YELLOW}Перезагрузить сервер сейчас? [y/N]:${NC} "
 
-read -r reboot_answer
+read -r reboot_answer < /dev/tty
 reboot_answer=${reboot_answer:-N}
 
 if [[ "$reboot_answer" =~ ^[Yy]$ ]]; then
