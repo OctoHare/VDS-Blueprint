@@ -93,7 +93,7 @@ EOF
 
 # 3. Применение sysctl
 echo "3/5  Применение sysctl..."
-sysctl --system > /dev/null
+sysctl --system > /dev/null 2>&1
 
 # 4. Лимиты nofile
 echo "4/5  Настройка лимитов открытых файлов..."
